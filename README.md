@@ -55,5 +55,18 @@ Ikuti langkah-langkah di bawah ini untuk menjalankan frontend di komputer lokal 
 Pastikan Anda sudah meng-clone repository ini dan masuk ke dalam foldernya:
 ```bash
 git clone [https://github.com/project-content-creator/fe-cc.git]
+```
+### 2. Buka Foldernya
+Pastikan Anda sudah berada di folder project-content-creator, lalu ketik di terminal:
+```bash
 cd ./fe-cc
+```
+### 3. Install Dependencies
+Pasang semua packages yang dibutuhkan:
+```bash
+npm i
+```
+atau
+```bash
 npm install
+```
