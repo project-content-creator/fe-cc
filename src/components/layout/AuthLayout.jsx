@@ -22,7 +22,7 @@ export default function AuthLayout({ headline, description, children }) {
         </ul>
       </aside>
 
-      <main className="flex items-center justify-center bg-white p-6 sm:p-10">
+      <main className="flex items-center justify-center bg-card p-6 sm:p-10">
         <div className="w-full max-w-sm">
           <img
             src={logoLockup}

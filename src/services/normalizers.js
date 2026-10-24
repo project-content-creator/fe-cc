@@ -1,10 +1,19 @@
+import { format } from "date-fns"
+
 // Satu-satunya tempat yang tahu bentuk respons mentah backend.
 // Jika nama field di API berbeda, cukup ubah file ini.
 
 export const unwrap = (response) => response.data?.data ?? response.data
 
-// Kolom DATE bisa datang sebagai "2026-10-18" atau "2026-10-18T00:00:00.000000Z".
-const toDate = (value) => (value ? String(value).slice(0, 10) : null)
+// Kolom DATE bisa datang sebagai "2026-10-18" atau timestamp ISO ("2026-10-17T17:00:00.000Z").
+// Timestamp dibaca ulang dengan zona waktu perangkat agar tanggalnya tidak bergeser sehari.
+const toDate = (value) => {
+  if (!value) return null
+  const text = String(value)
+  if (/^\d{4}-\d{2}-\d{2}$/.test(text)) return text
+  const parsed = new Date(text)
+  return Number.isNaN(parsed.getTime()) ? text.slice(0, 10) : format(parsed, "yyyy-MM-dd")
+}
 
 export function normalizeChecklist(raw) {
   // MySQL boolean bisa datang sebagai 0/1

@@ -1,14 +1,8 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { Link, NavLink, useLocation } from "react-router-dom"
-import { 
-  BarChart3, 
-  Check, 
-  ChevronDown, 
-  FileText, 
-  LayoutGrid, 
-  Settings, 
-  User } from "lucide-react"
+import { BarChart3, Check, ChevronDown, FileText, LayoutGrid, Settings, User } from "lucide-react"
 import logoIcon from "@/assets/logo-icon.png"
+import UserAvatar from "@/components/common/UserAvatar"
 import { useAuth } from "@/hooks/useAuth"
 import { cn } from "@/lib/utils"
 
@@ -19,7 +13,7 @@ const active = "bg-brand-gradient font-bold text-white"
 function NavItem({ to, icon: Icon, end, children }) {
   return (
     <NavLink to={to} end={end} className={({ isActive }) => cn(baseItem, isActive ? active : idle)}>
-      <Icon className="size-[18px]" aria-hidden="true" />
+      <Icon className="size-4.5" aria-hidden="true" />
       {children}
     </NavLink>
   )
@@ -42,11 +36,7 @@ export default function AppSidebar() {
   const { pathname } = useLocation()
   const inContent = pathname.startsWith("/content")
   const listActive = pathname === "/content" || (inContent && pathname !== "/content/new")
-  const [open, setOpen] = useState(inContent)
-
-  useEffect(() => {
-    if (inContent) setOpen(true)
-  }, [inContent])
+  const [open, setOpen] = useState(() => inContent)
 
   return (
     <aside className="flex w-full flex-none flex-col gap-1 bg-nav p-4 lg:sticky lg:top-0 lg:h-svh lg:w-58">
@@ -65,7 +55,7 @@ export default function AppSidebar() {
           aria-controls="content-submenu"
           className={cn(baseItem, "w-full", inContent ? "bg-white/10 text-white" : idle)}
         >
-          <FileText className="size-[18px]" aria-hidden="true" />
+          <FileText className="size-4.5" aria-hidden="true" />
           Content
           <ChevronDown
             className={cn("ml-auto size-4 transition-transform", open && "rotate-180")}
@@ -86,9 +76,7 @@ export default function AppSidebar() {
       </nav>
 
       <div className="mt-auto flex items-center gap-3 px-1 pt-6">
-        <span className="flex size-9 items-center justify-center rounded-full bg-brand-violet font-extrabold text-white">
-          {user?.name?.[0]?.toUpperCase() ?? "?"}
-        </span>
+        <UserAvatar user={user} className="size-9" />
         <div className="text-sm leading-tight text-white">
           {user?.name}
           <span className="block text-nav-ink">{user?.role}</span>

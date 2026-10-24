@@ -112,7 +112,7 @@ export default function MetricsSection({ contentId, isPublished, initialMetrics 
             <p className="mt-2 text-center text-xs text-muted-ink">Pencatatan terakhir: {formatDateLong(latest.recorded_at)}</p>
 
             <div className="mt-4 overflow-x-auto">
-              <table className="w-full min-w-105 text-sm text-ink">
+              <table className="w-full text-sm text-ink" style={{  minWidth: "420px" }}>
                 <caption className="sr-only">Riwayat pencatatan metrik</caption>
                 <thead>
                   <tr className="border-b border-surface-deep text-left text-xs text-muted-ink">
@@ -142,7 +142,7 @@ export default function MetricsSection({ contentId, isPublished, initialMetrics 
         <h2 id="metric-form-title" className="mb-3 text-lg font-extrabold text-ink">Catat metrik</h2>
         <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-4">
           {errors.root?.server && (
-            <p role="alert" className="rounded-xl bg-red-50 px-4 py-3 text-sm font-semibold text-danger">
+            <p role="alert" className="rounded-xl bg-danger/10 px-4 py-3 text-sm font-semibold text-danger">
               {errors.root.server.message}
             </p>
           )}

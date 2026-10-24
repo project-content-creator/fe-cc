@@ -28,9 +28,19 @@ export default function AuthProvider({ children }) {
     setUser(null)
   }, [])
 
+  // Memperbarui sebagian data user (mis. setelah edit profil) dan menyimpannya.
+  const updateUser = useCallback(
+    (patch) => {
+      const next = { ...user, ...patch }
+      localStorage.setItem(USER_KEY, JSON.stringify(next))
+      setUser(next)
+    },
+    [user]
+  )
+
   const value = useMemo(
-    () => ({ user, isAuthenticated: Boolean(token), login, logout }),
-    [user, token, login, logout]
+    () => ({ user, isAuthenticated: Boolean(token), login, logout, updateUser }),
+    [user, token, login, logout, updateUser]
   )
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

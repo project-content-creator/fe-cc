@@ -25,7 +25,7 @@ export default function KanbanCard({ content }) {
   return (
     <Link
       to={`/content/${content.id}`}
-      className="block rounded-2xl bg-white p-3.5 shadow-[0_2px_10px_rgba(79,95,255,0.07)] transition-shadow hover:shadow-[0_4px_16px_rgba(79,95,255,0.18)] focus-visible:ring-3 focus-visible:ring-brand-violet/40 focus-visible:outline-none"
+      className="block rounded-2xl bg-card p-3.5 shadow-[0_2px_10px_rgba(79,95,255,0.07)] transition-shadow hover:shadow-[0_4px_16px_rgba(79,95,255,0.18)] focus-visible:ring-3 focus-visible:ring-brand-violet/40 focus-visible:outline-none"
     >
       <h3 className="mb-2 text-sm leading-snug font-bold text-ink">{content.title}</h3>
       <div className="mb-2 flex flex-wrap items-center gap-1.5 text-xs text-muted-ink">

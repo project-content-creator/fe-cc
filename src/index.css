@@ -151,3 +151,28 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Mode gelap CreatorTrack */
+.dark {
+  --background: #0f1328;
+  --foreground: #edefff;
+  --card: #1b2040;
+  --card-foreground: #edefff;
+  --popover: #1b2040;
+  --popover-foreground: #edefff;
+  --border: rgb(255 255 255 / 12%);
+  --input: rgb(255 255 255 / 15%);
+
+  --color-ink: #edefff;
+  --color-muted-ink: #a3abd6;
+  --color-line: #363d6b;
+  --color-surface: #0f1328;
+  --color-surface-deep: #262c55;
+  --color-nav: #0a0d1f;
+  --color-chip: #262c55;
+  --color-chip-ink: #b9b6ff;
+  --color-violet-soft: #3a2a7a;
+  --color-violet-ink: #d9c8ff;
+  --color-link: #b9b6ff;
+  --color-danger: #ff8a80;
+}

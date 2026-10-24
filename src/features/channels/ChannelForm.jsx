@@ -43,7 +43,7 @@ export default function ChannelForm({
   return (
     <form onSubmit={handleSubmit(submit)} noValidate className="space-y-4">
       {errors.root?.server && (
-        <p role="alert" className="rounded-xl bg-red-50 px-4 py-3 text-sm font-semibold text-danger">
+        <p role="alert" className="rounded-xl bg-danger/10 px-4 py-3 text-sm font-semibold text-danger">
           {errors.root.server.message}
         </p>
       )}

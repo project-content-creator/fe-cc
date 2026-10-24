@@ -36,7 +36,7 @@ function EditForm({ content, channels, onClose, onSaved }) {
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-6">
       {errors.root?.server && (
-        <p role="alert" className="rounded-xl bg-red-50 px-4 py-3 text-sm font-semibold text-danger">
+        <p role="alert" className="rounded-xl bg-danger/10 px-4 py-3 text-sm font-semibold text-danger">
           {errors.root.server.message}
         </p>
       )}

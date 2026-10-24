@@ -5,7 +5,7 @@ export const STATUSES = [
   { value: "recording", label: "Recording", className: "bg-[#ffe9d2] text-[#8a3b00]" },
   { value: "editing", label: "Editing", className: "bg-[#ebdeff] text-[#5b22b8]" },
   { value: "ready", label: "Ready", className: "bg-[#d3f5ea] text-[#0b6b4e]" },
-  { value: "published", label: "Published", className: "bg-ink text-white" },
+  { value: "published", label: "Published", className: "bg-[#0f1b4c] text-white ring-1 ring-white/15" },
 ]
 
 export const STATUS_MAP = Object.fromEntries(STATUSES.map((s) => [s.value, s]))

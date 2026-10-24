@@ -25,7 +25,7 @@ const registerSchema = z.object({
 })
 
 const inputClass =
-  "h-12 rounded-xl border-line bg-white px-4 text-base text-ink focus-visible:border-brand-violet focus-visible:ring-brand-violet/30"
+  "h-12 rounded-xl border-line bg-card px-4 text-base text-ink focus-visible:border-brand-violet focus-visible:ring-brand-violet/30"
 
 function Field({ id, label, error, children }) {
   return (
@@ -85,7 +85,7 @@ export default function RegisterForm() {
       {errors.root?.server && (
         <p
           role="alert"
-          className="rounded-xl bg-red-50 px-4 py-3 text-sm font-semibold text-danger"
+          className="rounded-xl bg-danger/10 px-4 py-3 text-sm font-semibold text-danger"
         >
           {errors.root.server.message}
         </p>

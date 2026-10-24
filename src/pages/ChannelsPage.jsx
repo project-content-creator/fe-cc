@@ -108,7 +108,7 @@ export default function ChannelsPage() {
             <>
               Channel <b className="text-ink">{deleting.handle_name} ({PLATFORMS[deleting.platform]?.label})</b> akan
               dihapus permanen.
-              {deletingCount > 0 && ` Ada ${deletingCount} konten yang terhubung dengan channel ini.`} Tindakan ini
+              {deletingCount > 0 && ` ${deletingCount} konten di channel ini juga akan ikut terhapus.`} Tindakan ini
               tidak bisa dibatalkan.
             </>
           )

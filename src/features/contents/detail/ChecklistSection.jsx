@@ -19,7 +19,7 @@ export default function ChecklistSection({ contentId, initialItems }) {
   const handleToggle = async (item) => {
     setItems((prev) => prev.map((i) => (i.id === item.id ? { ...i, is_completed: !i.is_completed } : i)))
     try {
-      await toggleChecklist(item.id)
+      await toggleChecklist(item.id, item.is_completed)
     } catch {
       setItems((prev) => prev.map((i) => (i.id === item.id ? { ...i, is_completed: item.is_completed } : i)))
       toast.error("Gagal memperbarui checklist. Coba lagi.")
@@ -79,7 +79,7 @@ export default function ChecklistSection({ contentId, initialItems }) {
                   onChange={() => handleToggle(item)}
                   className="size-5 flex-none accent-brand-violet"
                 />
-                <span className={cn("break-words", item.is_completed && "text-muted-ink line-through")}>
+                <span className={cn("break-all", item.is_completed && "text-muted-ink line-through")}>
                   {item.task_name}
                 </span>
               </label>
@@ -87,7 +87,7 @@ export default function ChecklistSection({ contentId, initialItems }) {
                 type="button"
                 onClick={() => handleDelete(item)}
                 aria-label={`Hapus tugas ${item.task_name}`}
-                className="flex size-9 flex-none items-center justify-center rounded-lg text-muted-ink hover:bg-red-50 hover:text-danger focus-visible:ring-3 focus-visible:ring-brand-violet/40 focus-visible:outline-none"
+                className="flex size-9 flex-none items-center justify-center rounded-lg text-muted-ink hover:bg-danger/10 hover:text-danger focus-visible:ring-3 focus-visible:ring-brand-violet/40 focus-visible:outline-none"
               >
                 <Trash2 className="size-4" aria-hidden="true" />
               </button>

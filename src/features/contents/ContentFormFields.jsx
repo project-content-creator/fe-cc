@@ -17,7 +17,7 @@ import { PRIORITIES } from "@/constant/priorities"
 import { STATUSES } from "@/constant/status"
 import { inputClass, selectTriggerClass } from "@/lib/styles"
 
-const textareaClass = "rounded-xl border-line bg-white px-4 py-3 text-base text-ink focus-visible:border-brand-violet focus-visible:ring-brand-violet/30"
+const textareaClass = "rounded-xl border-line bg-card px-4 py-3 text-base text-ink focus-visible:border-brand-violet focus-visible:ring-brand-violet/30"
 
 // Dipakai bersama oleh halaman Buat Konten (mode "create") dan pop-up Edit (mode "edit").
 export default function ContentFormFields({ mode, form, channels }) {

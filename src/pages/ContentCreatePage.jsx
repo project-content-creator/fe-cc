@@ -47,7 +47,7 @@ export default function ContentCreatePage() {
       </PageHeader>
 
       {errors.root?.server && (
-        <p role="alert" className="mb-4 max-w-4xl rounded-xl bg-red-50 px-4 py-3 text-sm font-semibold text-danger">
+        <p role="alert" className="mb-4 max-w-4xl rounded-xl bg-danger/10 px-4 py-3 text-sm font-semibold text-danger">
           {errors.root.server.message}
         </p>
       )}

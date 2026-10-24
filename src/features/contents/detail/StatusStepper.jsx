@@ -19,7 +19,7 @@ export default function StatusStepper({ status }) {
               "flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-bold",
               isCurrent && cn(item.className, "ring-2 ring-brand-violet/40"),
               isDone && "bg-surface-deep text-muted-ink",
-              !isCurrent && !isDone && "border border-line bg-white text-muted-ink"
+              !isCurrent && !isDone && "border border-line bg-card text-muted-ink"
             )}
           >
             {isDone ? <Check className="size-3.5" aria-hidden="true" /> : <span>{index + 1}</span>}
