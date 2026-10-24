@@ -1,19 +1,56 @@
-# React + Vite
+# CreatorTrack (Frontend)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+CreatorTrack adalah aplikasi modern yang dirancang khusus bagi *content creator* untuk merencanakan, mengelola, melacak status, hingga menganalisis performa konten mereka di berbagai *channel* (seperti YouTube, dll.).
 
-Currently, two official plugins are available:
+Proyek ini dibangun menggunakan **React**, **Vite**, **Tailwind CSS v4**, dan **React Router**, serta terhubung langsung dengan backend [be-cc](https://github.com/project-content-creator/be-cc).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## 🚀 Fitur Utama
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+- **Authentication System:** Registrasi, Login, dan proteksi rute halaman aman berbasis JWT.
+- **Dashboard Overview:** Ringkasan statistik dan metrik konten secara *real-time*.
+- **Content Management:** 
+  - Membuat konten baru dengan detail deskripsi, format, dan *script*.
+  - Menampilkan daftar konten (*Content List*) lengkap dengan fitur filter status dan *channel*.
+  - Pop-up edit dan manajemen status publikasi.
+- **Interactive Checklist:** Menambah, mencentang, dan menghapus *sub-item* checklist langsung di detail konten.
+- **Pipeline Tracker:** Melacak progres konten dari tahap ide hingga terpublikasi.
+- **Analytics & Channels:** Grafik performa analitik konten dan manajemen channel media sosial.
+- **Settings & Theme Customization:** Pengaturan profil, ubah kata sandi, unggah foto, dan dukungan mode gelap/terang (*Dark/Light Mode*).
 
-Note: This will impact Vite dev & build performances.
-You can also try [the experimental native React Compiler support in plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md#rust-react-compiler) by using `compiler: true` in the plugin options instead of using the Babel plugin.
+---
 
-## Expanding the ESLint configuration
+## 🛠️ Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **Framework:** React (SPA)
+- **Build Tool:** Vite
+- **Styling:** Tailwind CSS v4 & Lucide Icons
+- **Routing:** React Router DOM
+- **Form & Validation:** React Hook Form & Zod
+- **HTTP Client:** Axios
+
+---
+
+# 👥 Kolaborator Proyek
+Proyek kolaborasi ini dikembangkan oleh:
+
+Frontend Developer: Inas Lathifah
+
+Backend Developer: Astrid Nur
+
+# 📜 Lisensi
+Proyek ini bersifat pribadi/internal untuk keperluan manajemen konten kreator.
+
+---
+
+## ⚙️ Cara Menjalankan Proyek (Setup & Installation)
+
+Ikuti langkah-langkah di bawah ini untuk menjalankan frontend di komputer lokal Anda:
+
+### 1. Clone Repository
+Pastikan Anda sudah meng-clone repository ini dan masuk ke dalam foldernya:
+```bash
+git clone [https://github.com/project-content-creator/fe-cc.git]
+cd ./fe-cc
+npm install
