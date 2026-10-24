@@ -32,14 +32,17 @@ Proyek ini dibangun menggunakan **React**, **Vite**, **Tailwind CSS v4**, dan **
 
 ---
 
-# 👥 Kolaborator Proyek
+## 👥 Kolaborator Proyek
+
 Proyek kolaborasi ini dikembangkan oleh:
 
 Frontend Developer: Inas Lathifah
 
 Backend Developer: Astrid Nur
 
-# 📜 Lisensi
+---
+
+## 📜 Lisensi
 Proyek ini bersifat pribadi/internal untuk keperluan manajemen konten kreator.
 
 ---
