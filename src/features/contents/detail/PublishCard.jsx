@@ -1,8 +1,8 @@
 import { ExternalLink } from "lucide-react"
-import { isHttpUrl } from "@/features/contents/contentForm"
-import { formatDateLong } from "@/lib/format"
-import { cardClass } from "@/lib/styles"
-import { cn } from "@/lib/utils"
+import { isHttpUrl } from "@/features/contents/contentForm.js"
+import { formatDateLong } from "@/lib/format.js"
+import { cardClass } from "@/lib/styles.js"
+import { cn } from "@/lib/utils.js"
 
 export default function PublishCard({ content }) {
   const published = content.status === "published"

@@ -1,6 +1,6 @@
 import ModeToggle from "@/components/common/ModeToggle"
-import { cardClass } from "@/lib/styles"
-import { cn } from "@/lib/utils"
+import { cardClass } from "@/lib/styles.js"
+import { cn } from "@/lib/utils.js"
 
 export default function ThemeCard() {
   return (

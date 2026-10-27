@@ -9,7 +9,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog"
-import { outlineBtn } from "@/lib/styles"
+import { outlineBtn } from "@/lib/styles.js"
 
 export default function ConfirmDialog({
   open,
@@ -41,7 +41,7 @@ export default function ConfirmDialog({
           <AlertDialogAction
             disabled={loading}
             onClick={(event) => {
-              event.preventDefault() // tahan dialog tetap terbuka sampai proses selesai
+              event.preventDefault() 
               onConfirm()
             }}
             className="h-11 rounded-xl bg-destructive px-5 text-sm font-bold text-destructive-foreground hover:bg-destructive/90"

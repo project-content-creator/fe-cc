@@ -1,7 +1,6 @@
 import { Label } from "@/components/ui/label"
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils.js"
 
-// Jika `id` tidak diberikan (mis. grup chip), label dirender sebagai teks biasa.
 export default function FormField({ id, label, error, hint, className, children }) {
   const LabelTag = id ? Label : "span"
   return (

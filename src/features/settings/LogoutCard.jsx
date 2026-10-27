@@ -4,10 +4,10 @@ import { useNavigate } from "react-router-dom"
 
 import ConfirmDialog from "@/components/common/ConfirmDialog"
 import { Button } from "@/components/ui/button"
-import { useAuth } from "@/hooks/useAuth"
-import { cardClass, outlineBtn } from "@/lib/styles"
-import { cn } from "@/lib/utils"
-import { logoutRequest } from "@/services/account.service"
+import { useAuth } from "@/hooks/useAuth.js"
+import { cardClass, outlineBtn } from "@/lib/styles.js"
+import { cn } from "@/lib/utils.js"
+import { logoutRequest } from "@/services/account.service.js"
 
 export default function LogoutCard() {
   const { logout } = useAuth()

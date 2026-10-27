@@ -1,4 +1,4 @@
-import { PLATFORMS } from "@/constant/platforms"
+import { PLATFORMS } from "@/constant/platforms.js"
 
 export default function PlatformBadge({ platform }) {
   const config = PLATFORMS[platform]

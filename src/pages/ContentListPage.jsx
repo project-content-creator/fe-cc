@@ -11,11 +11,11 @@ import { Button } from "@/components/ui/button"
 import ContentEditDialog from "@/features/contents/ContentEditDialog"
 import ContentFilters from "@/features/contents/ContentFilters"
 import ContentTable from "@/features/contents/ContentTable"
-import { useContentFilters } from "@/features/contents/useContentFilters"
-import { useChannels } from "@/hooks/useChannels"
-import { useContents } from "@/hooks/useContents"
-import { brandBtn } from "@/lib/styles"
-import { deleteContent } from "@/services/content.service"
+import { useContentFilters } from "@/features/contents/useContentFilters.js"
+import { useChannels } from "@/hooks/useChannels.js"
+import { useContents } from "@/hooks/useContents.js"
+import { brandBtn } from "@/lib/styles.js"
+import { deleteContent } from "@/services/content.service.js"
 
 function deleteDescription(content) {
   const parts = [

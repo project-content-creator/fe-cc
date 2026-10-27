@@ -1,5 +1,5 @@
-import { STATUS_MAP } from "@/constant/status"
-import { cn } from "@/lib/utils"
+import { STATUS_MAP } from "@/constant/status.js"
+import { cn } from "@/lib/utils.js"
 
 export default function StatusBadge({ status, className }) {
   const config = STATUS_MAP[status]

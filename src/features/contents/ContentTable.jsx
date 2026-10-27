@@ -3,18 +3,18 @@ import { Link } from "react-router-dom"
 import PlatformBadge from "@/components/common/PlatformBadge"
 import StatusBadge from "@/components/common/StatusBadge"
 import { Button } from "@/components/ui/button"
-import { FORMAT_MAP } from "@/constant/formats"
-import { PRIORITY_MAP } from "@/constant/priorities"
-import { formatDate } from "@/lib/format"
-import { cardClass, outlineBtn } from "@/lib/styles"
-import { cn } from "@/lib/utils"
+import { FORMAT_MAP } from "@/constant/formats.js"
+import { PRIORITY_MAP } from "@/constant/priorities.js"
+import { formatDate } from "@/lib/format.js"
+import { cardClass, outlineBtn } from "@/lib/styles.js"
+import { cn } from "@/lib/utils.js"
 
 const small = "h-10 px-4"
 
 export default function ContentTable({ contents, onEdit, onDelete }) {
   return (
     <div className={cn(cardClass, "overflow-x-auto p-6")}>
-      <table className="w-full min-w-[860px] border-collapse text-sm text-ink">
+      <table className="w-full min-w-1.5 border-collapse text-sm text-ink">
         <thead>
           <tr className="border-b border-surface-deep text-left text-muted-ink">
             <th scope="col" className="pb-3 font-medium">Judul</th>

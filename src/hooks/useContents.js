@@ -1,6 +1,6 @@
-// digunakan di komponen list atau tabel konten
+
 import { useEffect, useState } from "react"
-import { fetchContents } from "@/services/content.service"
+import { fetchContents } from "@/services/content.service.js"
 
 export function useContents(params = {}) {
   const [state, setState] = useState({ data: [], loading: true, error: null })

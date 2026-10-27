@@ -3,8 +3,8 @@ import { Link, NavLink, useLocation } from "react-router-dom"
 import { BarChart3, Check, ChevronDown, FileText, LayoutGrid, Settings, User } from "lucide-react"
 import logoIcon from "@/assets/logo-icon.png"
 import UserAvatar from "@/components/common/UserAvatar"
-import { useAuth } from "@/hooks/useAuth"
-import { cn } from "@/lib/utils"
+import { useAuth } from "@/hooks/useAuth.js"
+import { cn } from "@/lib/utils.js"
 
 const baseItem = "flex h-11 items-center gap-3 rounded-xl px-3 text-sm transition-colors"
 const idle = "text-nav-ink hover:bg-white/5 hover:text-white"
@@ -42,7 +42,7 @@ export default function AppSidebar() {
     <aside className="flex w-full flex-none flex-col gap-1 bg-nav p-4 lg:sticky lg:top-0 lg:h-svh lg:w-58">
       <div className="mb-6 flex items-center gap-2.5 px-1 pt-1">
         <img src={logoIcon} alt="" className="size-10" />
-        <span className="text-lg font-bold text-white">CreatorTrack</span>
+        <span className="text-lg font-bold text-white">Creator Track</span>
       </div>
 
       <nav aria-label="Menu utama" className="flex flex-col gap-1">

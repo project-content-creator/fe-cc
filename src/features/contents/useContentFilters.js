@@ -1,6 +1,5 @@
 import { useSearchParams } from "react-router-dom"
 
-// Filter disimpan di URL (?status=&channel_id=&format_type=) agar tetap ada saat refresh dan bisa dibagikan.
 export function useContentFilters() {
   const [searchParams, setSearchParams] = useSearchParams()
 

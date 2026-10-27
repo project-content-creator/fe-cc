@@ -1,4 +1,3 @@
-// Urutan sesuai lifecycle konten: idea -> scripting -> recording -> editing -> ready -> published
 export const STATUSES = [
   { value: "idea", label: "Idea", className: "bg-[#e8eaf3] text-[#3a4262]" },
   { value: "scripting", label: "Scripting", className: "bg-[#dce6ff] text-[#1b3a9e]" },

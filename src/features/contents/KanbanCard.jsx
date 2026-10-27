@@ -1,11 +1,10 @@
 import { Link } from "react-router-dom"
 
 import PlatformBadge from "@/components/common/PlatformBadge"
-import { FORMAT_MAP } from "@/constant/formats"
-import { PRIORITY_MAP } from "@/constant/priorities"
-import { formatCompact, formatDate } from "@/lib/format"
+import { FORMAT_MAP } from "@/constant/formats.js"
+import { PRIORITY_MAP } from "@/constant/priorities.js"
+import { formatCompact, formatDate } from "@/lib/format.js"
 
-// Bagian yang datanya belum ada dari API (views, checklist) dilewati, bukan ditampilkan 0.
 function metaLine(content) {
   const parts = []
   if (content.status === "published") {

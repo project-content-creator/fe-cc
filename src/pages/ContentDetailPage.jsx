@@ -96,7 +96,7 @@ export default function ContentDetailPage() {
 
       <header className="mb-5 flex flex-wrap items-start justify-between gap-4">
         <div className="min-w-0">
-          <h1 className="text-2xl font-extrabold break-words text-ink lg:text-3xl">{content.title}</h1>
+          <h1 className="text-2xl font-extrabold break-word text-ink lg:text-3xl">{content.title}</h1>
           <div className="mt-2.5 flex flex-wrap items-center gap-2 text-sm text-muted-ink">
             <StatusBadge status={content.status} />
             <span className="rounded-full bg-surface-deep px-3 py-1 text-xs font-bold text-ink">

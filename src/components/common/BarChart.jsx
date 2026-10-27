@@ -1,6 +1,5 @@
-import { formatCompact } from "@/lib/format"
+import { formatCompact } from "@/lib/format.js"
 
-// data: [{ key, label, value }]
 export default function BarChart({ data, ariaLabel }) {
   const max = Math.max(...data.map((item) => item.value), 1)
 

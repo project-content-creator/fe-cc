@@ -1,5 +1,5 @@
 import { z } from "zod"
-import { PLATFORMS } from "@/constant/platforms"
+import { PLATFORMS } from "@/constant/platforms.js"
 
 export const channelSchema = z.object({
   platform: z.enum(Object.keys(PLATFORMS), { message: "Platform wajib dipilih" }),

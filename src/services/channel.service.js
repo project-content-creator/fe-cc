@@ -1,11 +1,11 @@
-import api from "@/lib/api"
-import { getUserId } from "@/lib/session"
-import { getList } from "@/services/helpers"
+import api from "@/lib/api.js"
+import { getUserId } from "@/lib/session.js"
+import { getList } from "@/services/helpers.js"
 
 let cache = null
 let cacheUserId = null
 
-// GET /api/v1/channel. be-cc mengembalikan channel semua user, jadi disaring ke user yang login.
+// GET /api/v1/channel
 export function fetchChannels({ force = false } = {}) {
   const userId = getUserId()
   if (!cache || force || cacheUserId !== userId) {
@@ -32,7 +32,7 @@ export async function updateChannel(id, payload) {
   cache = null
 }
 
-// DELETE /api/v1/channel/:id. Konten di channel itu ikut terhapus (ON DELETE CASCADE).
+// DELETE /api/v1/channel/:id
 export async function deleteChannel(id) {
   await api.delete(`/channel/${id}`)
   cache = null

@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button"
-import { brandBtn, cardClass } from "@/lib/styles"
-import { cn } from "@/lib/utils"
+import { brandBtn, cardClass } from "@/lib/styles.js"
+import { cn } from "@/lib/utils.js"
 
 export default function ErrorState({ onRetry }) {
   return (

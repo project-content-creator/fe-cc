@@ -1,6 +1,6 @@
 import { z } from "zod"
-import { FORMAT_VALUES } from "@/constant/formats"
-import { PRIORITY_VALUES } from "@/constant/priorities"
+import { FORMAT_VALUES } from "@/constant/formats.js"
+import { PRIORITY_VALUES } from "@/constant/priorities.js"
 
 export function isHttpUrl(value) {
   try {
@@ -11,7 +11,6 @@ export function isHttpUrl(value) {
   }
 }
 
-// Validasi sisi klien hanya untuk UX. Validasi utama (termasuk aturan published) tetap di server.
 export const contentSchema = z
   .object({
     title: z.string().trim().min(1, "Judul wajib diisi").max(255, "Judul maksimal 255 karakter"),
@@ -22,7 +21,6 @@ export const contentSchema = z
     description: z.string().optional(),
     script_draft: z.string().optional(),
     
-    // Hanya dipakai di mode edit
     status: z.string().optional(),
     published_url: z.string().trim().optional(),
     published_date: z.string().optional(),

@@ -11,10 +11,10 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog"
 import ContentFormFields from "@/features/contents/ContentFormFields"
-import { contentSchema, toFormValues, toPayload } from "@/features/contents/contentForm"
-import { applyServerErrors } from "@/lib/formErrors"
-import { brandBtn, outlineBtn } from "@/lib/styles"
-import { updateContent } from "@/services/content.service"
+import { contentSchema, toFormValues, toPayload } from "@/features/contents/contentForm.js"
+import { applyServerErrors } from "@/lib/formErrors.js"
+import { brandBtn, outlineBtn } from "@/lib/styles.js"
+import { updateContent } from "@/services/content.service.js"
 
 function EditForm({ content, channels, onClose, onSaved }) {
   const form = useForm({

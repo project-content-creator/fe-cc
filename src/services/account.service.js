@@ -1,6 +1,6 @@
-import api from "@/lib/api"
-import { getStoredUser } from "@/lib/session"
-import { unwrap } from "@/services/normalizers"
+import api from "@/services/api.js"
+import { getStoredUser } from "@/lib/session.js"
+import { unwrap } from "@/services/normalizers.js"
 
 const readAsDataUrl = (file) =>
   new Promise((resolve, reject) => {
@@ -10,8 +10,7 @@ const readAsDataUrl = (file) =>
     reader.readAsDataURL(file)
   })
 
-// PUT /api/v1/user/:id { name, email, role }. be-cc mewajibkan ketiga field dikirim.
-// be-cc belum menyimpan foto, jadi foto profil hanya disimpan di browser ini.
+// PUT /api/v1/user/:id { name, email, role }
 export async function updateProfile({ name, email, avatar, removeAvatar }) {
   const user = getStoredUser()
   const response = await api.put(`/user/${user.id}`, { name, email, role: user.role ?? "creator" })
@@ -22,8 +21,6 @@ export async function updateProfile({ name, email, avatar, removeAvatar }) {
   return result
 }
 
-// be-cc tidak memeriksa password lama saat update, jadi diverifikasi lewat login terlebih dulu.
-// Password salah -> 401 (ditangani PasswordCard).
 export async function changePassword({ current_password, password }) {
   const user = getStoredUser()
   await api.post("/auth/login", { email: user.email, password: current_password })
@@ -35,5 +32,4 @@ export async function changePassword({ current_password, password }) {
   })
 }
 
-// be-cc belum punya endpoint logout; sesi cukup dihapus di sisi klien.
 export async function logoutRequest() {}

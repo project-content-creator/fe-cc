@@ -1,8 +1,8 @@
-import api from "@/lib/api"
-import { getUserId } from "@/lib/session"
-import { fetchChannels } from "@/services/channel.service"
-import { getList } from "@/services/helpers"
-import { normalizeContent, unwrap } from "@/services/normalizers"
+import api from "@/lib/api.js"
+import { getUserId } from "@/lib/session.js"
+import { fetchChannels } from "@/services/channel.service.js"
+import { getList } from "@/services/helpers.js"
+import { normalizeContent, unwrap } from "@/services/normalizers.js"
 
 async function channelsById() {
   const channels = await fetchChannels()

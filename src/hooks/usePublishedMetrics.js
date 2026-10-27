@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { fetchPublishedWithMetrics } from "@/services/content.service"
+import { fetchPublishedWithMetrics } from "@/services/content.service.js"
 
 export function usePublishedMetrics() {
   const [state, setState] = useState({ data: [], loading: true, error: null })

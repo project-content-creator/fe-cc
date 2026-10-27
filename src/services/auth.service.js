@@ -1,13 +1,12 @@
-import api from "@/lib/api"
-import { normalizeAuth, unwrap } from "@/services/normalizers"
+import api from "@/lib/api.js"
+import { normalizeAuth, unwrap } from "@/services/normalizers.js"
 
-// be-cc belum punya POST /auth/register. Pendaftaran memakai POST /user (role wajib diisi).
+// POST /auth/register. Pendaftaran memakai POST /user
 export async function registerUser({ name, email, password }) {
   try {
     const { data } = await api.post("/user", { name, email, password, role: "creator" })
     return data
   } catch (error) {
-    // 409 { message: "Email already taken" } dipetakan ke error pada field email.
     if (error.response?.status === 409) {
       error.response.status = 422
       error.response.data = { errors: { email: [error.response.data?.message ?? "Email already taken"] } }
@@ -16,7 +15,7 @@ export async function registerUser({ name, email, password }) {
   }
 }
 
-// POST /api/v1/auth/login -> { status, message, data: { user: { id, name, email }, token } }
+// POST /api/v1/auth/login 
 export async function loginUser({ email, password }) {
   const { data } = await api.post("/auth/login", { email, password })
   const auth = normalizeAuth(data, email)
@@ -28,7 +27,6 @@ export async function loginUser({ email, password }) {
     )
     auth.user = { ...auth.user, ...profile }
   } catch {
-    // lanjut tanpa role
   }
   return auth
 }

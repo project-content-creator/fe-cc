@@ -15,12 +15,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { PLATFORMS } from "@/constants/platforms"
+import { PLATFORMS } from "@/constant/platforms.js"
 import { buildAnalytics, PERIODS } from "@/features/analytics/analyticsUtils"
-import { usePublishedMetrics } from "@/hooks/usePublishedMetrics"
-import { formatCompact } from "@/lib/format"
-import { cardClass, filterTriggerClass } from "@/lib/styles"
-import { cn } from "@/lib/utils"
+import { usePublishedMetrics } from "@/hooks/usePublishedMetrics.js"
+import { formatCompact } from "@/lib/format.js"
+import { cardClass, filterTriggerClass } from "@/lib/styles.js"
+import { cn } from "@/lib/utils.js"
 
 export default function AnalyticsPage() {
   const [period, setPeriod] = useState("30")

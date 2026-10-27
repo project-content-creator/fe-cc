@@ -1,6 +1,6 @@
-// digunakan di komponen konten detail page
+
 import { useEffect, useState } from "react"
-import { fetchContent } from "@/services/content.service"
+import { fetchContent } from "@/services/content.service.js"
 
 export function useContent(id) {
   const [state, setState] = useState({ data: null, loading: true, error: null })

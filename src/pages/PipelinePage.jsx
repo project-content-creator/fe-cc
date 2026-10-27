@@ -7,10 +7,10 @@ import PageHeader from "@/components/common/PageHeader"
 import { Button } from "@/components/ui/button"
 import ContentFilters from "@/features/contents/ContentFilters"
 import KanbanBoard from "@/features/contents/KanbanBoard"
-import { useContentFilters } from "@/features/contents/useContentFilters"
-import { useChannels } from "@/hooks/useChannels"
-import { useContents } from "@/hooks/useContents"
-import { brandBtn } from "@/lib/styles"
+import { useContentFilters } from "@/features/contents/useContentFilters.js"
+import { useChannels } from "@/hooks/useChannels.js"
+import { useContents } from "@/hooks/useContents.js"
+import { brandBtn } from "@/lib/styles.js"
 
 export default function PipelinePage() {
   const { filters, setFilter, params } = useContentFilters()

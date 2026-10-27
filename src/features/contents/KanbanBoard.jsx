@@ -1,5 +1,5 @@
 import StatusBadge from "@/components/common/StatusBadge"
-import { STATUSES } from "@/constant/status"
+import { STATUSES } from "@/constant/status.js"
 import KanbanCard from "@/features/contents/KanbanCard"
 
 export default function KanbanBoard({ contents }) {

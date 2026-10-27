@@ -1,7 +1,6 @@
-import api from "@/lib/api"
-import { unwrap } from "@/services/normalizers"
+import api from "@/lib/api.js"
+import { unwrap } from "@/services/normalizers.js"
 
-// Backend membalas 404 jika hasil daftar kosong; bagi UI itu sama dengan daftar kosong.
 export async function getList(url, params) {
   try {
     const data = unwrap(await api.get(url, { params }))

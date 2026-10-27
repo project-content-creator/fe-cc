@@ -5,10 +5,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { FORMATS } from "@/constant/formats"
-import { PLATFORMS } from "@/constant/platforms"
-import { STATUSES } from "@/constant/status"
-import { filterTriggerClass } from "@/lib/styles"
+import { FORMATS } from "@/constant/formats.js"
+import { PLATFORMS } from "@/constant/platforms.js"
+import { STATUSES } from "@/constant/status.js"
+import { filterTriggerClass } from "@/lib/styles.js"
 
 function FilterSelect({ label, value, onChange, allLabel, options }) {
   return (

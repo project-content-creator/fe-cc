@@ -1,4 +1,3 @@
-// value = nilai di database (contents.format_type), label = teks untuk pengguna
 export const FORMATS = [
   { value: "short_video", label: "Short Video" },
   { value: "long_video", label: "Long Video" },

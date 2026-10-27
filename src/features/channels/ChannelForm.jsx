@@ -5,13 +5,12 @@ import ChipGroup from "@/components/common/ChipGroup"
 import FormField from "@/components/common/FormField"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { PLATFORM_OPTIONS } from "@/constant/platforms"
-import { channelDefaults, channelSchema } from "@/features/channels/channelSchema"
-import { applyServerErrors } from "@/lib/formErrors"
-import { brandBtn, inputClass, outlineBtn } from "@/lib/styles"
-import { cn } from "@/lib/utils"
+import { PLATFORM_OPTIONS } from "@/constant/platforms.js"
+import { channelDefaults, channelSchema } from "@/features/channels/channelSchema.js"
+import { applyServerErrors } from "@/lib/formErrors.js"
+import { brandBtn, inputClass, outlineBtn } from "@/lib/styles.js"
+import { cn } from "@/lib/utils.js"
 
-// Dipakai untuk form "Tambah channel" (di halaman) dan pop-up "Edit channel".
 export default function ChannelForm({
   idPrefix,
   initialValues = channelDefaults,

@@ -1,7 +1,7 @@
 import { Check } from "lucide-react"
-import { STATUSES } from "@/constant/status"
-import { cardClass } from "@/lib/styles"
-import { cn } from "@/lib/utils"
+import { STATUSES } from "@/constant/status.js"
+import { cardClass } from "@/lib/styles.js"
+import { cn } from "@/lib/utils.js"
 
 export default function StatusStepper({ status }) {
   const currentIndex = STATUSES.findIndex((item) => item.value === status)

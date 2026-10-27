@@ -7,10 +7,10 @@ import FeedbackDialog from "@/components/common/FeedbackDialog"
 import FormField from "@/components/common/FormField"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { applyServerErrors } from "@/lib/formErrors"
-import { brandBtn, cardClass, inputClass } from "@/lib/styles"
-import { cn } from "@/lib/utils"
-import { changePassword } from "@/services/account.service"
+import { applyServerErrors } from "@/lib/formErrors.js"
+import { brandBtn, cardClass, inputClass } from "@/lib/styles.js"
+import { cn } from "@/lib/utils.js"
+import { changePassword } from "@/services/account.service.js"
 
 const passwordSchema = z.object({
   current_password: z.string().min(1, "Password saat ini wajib diisi"),

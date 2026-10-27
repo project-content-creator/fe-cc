@@ -6,21 +6,18 @@ import { z } from "zod"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { registerUser } from "@/services/auth.service"
+import { registerUser } from "@/services/auth.service.js"
 
-// Validasi sisi klien hanya untuk UX. Validasi utama tetap di server.
 const registerSchema = z.object({
   name: z
     .string()
     .trim()
-    .min(1, "Nama lengkap wajib diisi")
-    .max(100, "Nama maksimal 100 karakter"),
+    .min(1, "Nama lengkap wajib diisi"),
   email: z
     .string()
     .trim()
     .min(1, "Email wajib diisi")
-    .email("Format email tidak valid")
-    .max(191, "Email maksimal 191 karakter"),
+    .email("Format email tidak valid"),
   password: z.string().min(8, "Password minimal 8 karakter"),
 })
 
@@ -62,7 +59,6 @@ export default function RegisterForm() {
     } catch (err) {
       const response = err.response
 
-      // Asumsi kontrak error: 422 { errors: { email: ["Email already taken"] } }
       if (response?.status === 422 && response.data?.errors) {
         Object.entries(response.data.errors).forEach(([field, messages]) => {
           setError(field, {
@@ -75,7 +71,7 @@ export default function RegisterForm() {
 
       setError("root.server", {
         type: "server",
-        message: "Pendaftaran gagal. Periksa koneksi internet lalu coba lagi.",
+        message: "Pendaftaran gagal. Coba lagi",
       })
     }
   }

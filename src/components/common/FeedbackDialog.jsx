@@ -8,10 +8,9 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog"
-import { brandBtn } from "@/lib/styles"
-import { cn } from "@/lib/utils"
+import { brandBtn } from "@/lib/styles.js"
+import { cn } from "@/lib/utils.js"
 
-// Dialog pemberitahuan berhasil (satu tombol OK).
 export default function FeedbackDialog({ open, onOpenChange, title, description, icon: Icon = Check }) {
   return (
     <AlertDialog open={open} onOpenChange={onOpenChange}>

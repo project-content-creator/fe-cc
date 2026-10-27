@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom"
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils.js"
 
 const base =
   "inline-flex h-11 items-center rounded-xl px-5 text-sm font-bold transition-colors"

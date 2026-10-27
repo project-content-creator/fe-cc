@@ -4,9 +4,9 @@ import { toast } from "sonner"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { brandBtn, cardClass, inputClass } from "@/lib/styles"
-import { cn } from "@/lib/utils"
-import { addChecklist, deleteChecklist, toggleChecklist } from "@/services/checklist.service"
+import { brandBtn, cardClass, inputClass } from "@/lib/styles.js"
+import { cn } from "@/lib/utils.js"
+import { addChecklist, deleteChecklist, toggleChecklist } from "@/services/checklist.service.js"
 
 export default function ChecklistSection({ contentId, initialItems }) {
   const [items, setItems] = useState(initialItems)
@@ -15,7 +15,6 @@ export default function ChecklistSection({ contentId, initialItems }) {
   const [adding, setAdding] = useState(false)
   const doneCount = items.filter((item) => item.is_completed).length
 
-  // Optimistic update: centang langsung berubah, dikembalikan jika request gagal.
   const handleToggle = async (item) => {
     setItems((prev) => prev.map((i) => (i.id === item.id ? { ...i, is_completed: !i.is_completed } : i)))
     try {

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { fetchChannels } from "@/services/channel.service"
+import { fetchChannels } from "@/services/channel.service.js"
 
 export function useChannels() {
   const [data, setData] = useState([])

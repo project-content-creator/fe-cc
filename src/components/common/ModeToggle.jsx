@@ -7,9 +7,8 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { useTheme } from "@/hooks/useTheme"
+import { useTheme } from "@/hooks/useTheme.js"
 
-// Tombol ganti tema seperti di situs shadcn/ui: ikon matahari/bulan + menu Light, Dark, System.
 export default function ModeToggle() {
   const { setTheme } = useTheme()
 

@@ -1,5 +1,5 @@
 import { format, subDays } from "date-fns"
-import { formatDate } from "@/lib/format"
+import { formatDate } from "@/lib/format.js"
 
 export const PERIODS = [
   { value: "7", label: "7 hari terakhir" },
@@ -11,7 +11,6 @@ export const PERIODS = [
 // Metrik adalah "snapshot" (angka kumulatif per tanggal pencatatan). Aturan di sini:
 // - Total per konten = snapshot terbaru dalam periode yang dipilih.
 // - Grafik = jumlah views dari semua snapshot yang dicatat pada tanggal yang sama.
-// Idealnya agregasi ini dilakukan backend (endpoint analytics) agar tidak berat di klien.
 export function buildAnalytics(contents, period, today = new Date()) {
   const start = period === "all" ? null : format(subDays(today, Number(period)), "yyyy-MM-dd")
   const rows = []
@@ -20,7 +19,7 @@ export function buildAnalytics(contents, period, today = new Date()) {
   for (const content of contents) {
     const inRange = (content.metrics ?? []).filter((m) => !start || m.recorded_at >= start)
     if (inRange.length === 0) continue
-    const latest = inRange[0] // metrics sudah diurutkan dari yang terbaru
+    const latest = inRange[0]
     rows.push({
       id: content.id,
       title: content.title,

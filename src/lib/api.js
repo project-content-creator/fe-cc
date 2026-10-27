@@ -1,16 +1,18 @@
 import axios from "axios"
 
-export const TOKEN_KEY = "creatortrack_token"
-export const USER_KEY = "creatortrack_user"
+// export const TOKEN_KEY = "token"
+// export const USER_KEY = "user"
 
-// Asumsi: autentikasi memakai Bearer token. Sesuaikan jika backend memakai session cookie.
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
-  headers: { Accept: "application/json" },
+  baseURL: "http://localhost:5000/api",
+  header: {
+        "Content-Type":"application/json",
+        Accept:"application/json"
+    },
 })
 
 api.interceptors.request.use((config) => {
-  const token = localStorage.getItem(TOKEN_KEY)
+  const token = localStorage.getItem('token')
   if (token) config.headers.Authorization = `Bearer ${token}`
   return config
 })
@@ -20,8 +22,8 @@ api.interceptors.response.use(
   (error) => {
     const isAuthRequest = error.config?.url?.startsWith("/auth/")
     if (error.response?.status === 401 && !isAuthRequest) {
-      localStorage.removeItem(TOKEN_KEY)
-      localStorage.removeItem(USER_KEY)
+      localStorage.removeItem('token')
+      localStorage.removeItem('user')
       window.location.assign("/login")
     }
     return Promise.reject(error)

@@ -8,9 +8,9 @@ import { z } from "zod"
 import FormField from "@/components/common/FormField"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { useAuth } from "@/hooks/useAuth"
-import { inputClass } from "@/lib/styles"
-import { loginUser } from "@/services/auth.service"
+import { useAuth } from "@/hooks/useAuth.js"
+import { inputClass } from "@/lib/styles.js"
+import { loginUser } from "@/services/auth.service.js"
 
 const loginSchema = z.object({
   email: z.string().trim().min(1, "Email wajib diisi").email("Format email tidak valid"),
@@ -28,9 +28,8 @@ export default function LoginForm() {
     formState: { errors, isSubmitting },
   } = useForm({ resolver: zodResolver(loginSchema), defaultValues: { email: "", password: "" } })
 
-  // Pesan sukses setelah mendaftar (dikirim dari RegisterForm lewat state router)
   useEffect(() => {
-    if (location.state?.registered) toast.success("Akun berhasil dibuat. Silakan masuk.")
+    if (location.state?.registered) toast.success("Akun berhasil dibuat.")
   }, [location.state])
 
   const onSubmit = async (values) => {
@@ -45,7 +44,7 @@ export default function LoginForm() {
       } else {
         setError("root.server", {
           type: "server",
-          message: "Gagal masuk. Periksa koneksi internet lalu coba lagi.",
+          message: "Gagal masuk. Coba lagi.",
         })
       }
     }

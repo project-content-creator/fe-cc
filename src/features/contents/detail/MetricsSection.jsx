@@ -8,11 +8,11 @@ import { z } from "zod"
 import FormField from "@/components/common/FormField"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { applyServerErrors } from "@/lib/formErrors"
-import { formatDate, formatDateLong, formatNumber } from "@/lib/format"
-import { brandBtn, cardClass, inputClass } from "@/lib/styles"
-import { cn } from "@/lib/utils"
-import { addMetric } from "@/services/metric.service"
+import { applyServerErrors } from "@/lib/formErrors.js"
+import { formatDate, formatDateLong, formatNumber } from "@/lib/format.js"
+import { brandBtn, cardClass, inputClass } from "@/lib/styles.js"
+import { cn } from "@/lib/utils.js"
+import { addMetric } from "@/services/metric.service.js"
 
 const count = (label) =>
   z.number({ message: `${label} harus berupa angka` })

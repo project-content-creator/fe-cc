@@ -1,6 +1,5 @@
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils.js"
 
-// `src` (opsional) menimpa foto user, mis. untuk pratinjau sebelum disimpan. null = tampilkan inisial.
 export default function UserAvatar({ user, src, className }) {
   const url = src === undefined ? user?.avatar_url : src
 

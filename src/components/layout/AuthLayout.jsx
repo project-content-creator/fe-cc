@@ -1,5 +1,5 @@
 import StatusBadge from "@/components/common/StatusBadge"
-import { STATUSES } from "@/constant/status"
+import { STATUSES } from "@/constant/status.js"
 import logoLockup from "@/assets/logo-lockup.png"
 
 export default function AuthLayout({ headline, description, children }) {

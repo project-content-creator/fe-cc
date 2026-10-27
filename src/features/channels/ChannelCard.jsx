@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button"
-import { PLATFORMS } from "@/constant/platforms"
-import { cardClass, outlineBtn } from "@/lib/styles"
-import { cn } from "@/lib/utils"
+import { PLATFORMS } from "@/constant/platforms.js"
+import { cardClass, outlineBtn } from "@/lib/styles.js"
+import { cn } from "@/lib/utils.js"
 
 const small = "h-10 px-4"
 

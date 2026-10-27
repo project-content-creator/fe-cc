@@ -1,6 +1,5 @@
 import { differenceInCalendarDays, parseISO } from "date-fns"
 
-// Konten terjadwal 7 hari ke depan yang belum published, diurutkan dari yang terdekat.
 export function getUpcoming(contents, today = new Date()) {
   return contents
     .filter((c) => c.scheduled_date && c.status !== "published")
@@ -11,7 +10,6 @@ export function getUpcoming(contents, today = new Date()) {
     .sort((a, b) => a.scheduled_date.localeCompare(b.scheduled_date))
 }
 
-// Konten yang butuh tindakan. Aturan ini asumsi UI; sesuaikan dengan kebutuhan tim.
 export function getAttentionItems(contents, today = new Date()) {
   const items = []
   for (const c of contents) {

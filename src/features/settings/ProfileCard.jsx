@@ -9,18 +9,18 @@ import FormField from "@/components/common/FormField"
 import UserAvatar from "@/components/common/UserAvatar"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { useAuth } from "@/hooks/useAuth"
-import { applyServerErrors } from "@/lib/formErrors"
-import { brandBtn, cardClass, inputClass, outlineBtn } from "@/lib/styles"
-import { cn } from "@/lib/utils"
-import { updateProfile } from "@/services/account.service"
+import { useAuth } from "@/hooks/useAuth.js"
+import { applyServerErrors } from "@/lib/formErrors.js"
+import { brandBtn, cardClass, inputClass, outlineBtn } from "@/lib/styles.js"
+import { cn } from "@/lib/utils.js"
+import { updateProfile } from "@/services/account.service.js"
 
 const MAX_PHOTO_BYTES = 2 * 1024 * 1024
 const PHOTO_TYPES = ["image/jpeg", "image/png"]
 
 const profileSchema = z.object({
-  name: z.string().trim().min(1, "Nama wajib diisi").max(100, "Nama maksimal 100 karakter"),
-  email: z.string().trim().min(1, "Email wajib diisi").email("Format email tidak valid").max(191, "Email maksimal 191 karakter"),
+  name: z.string().trim().min(1, "Nama wajib diisi"),
+  email: z.string().trim().min(1, "Email wajib diisi").email("Format email tidak valid"),
 })
 
 export default function ProfileCard() {
@@ -41,7 +41,6 @@ export default function ProfileCard() {
     defaultValues: { name: user?.name ?? "", email: user?.email ?? "" },
   })
 
-  // Pratinjau foto yang baru dipilih (belum diunggah sampai "Simpan profil" ditekan).
   const preview = useMemo(() => (file ? URL.createObjectURL(file) : null), [file])
   useEffect(() => () => preview && URL.revokeObjectURL(preview), [preview])
 
@@ -122,7 +121,7 @@ export default function ProfileCard() {
             <input
               ref={inputRef}
               type="file"
-              accept="image/png,image/jpeg"
+              accept="image/png, image/jpeg, image/jpg"
               onChange={handleFile}
               className="sr-only"
               tabIndex={-1}
