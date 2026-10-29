@@ -10,7 +10,7 @@ export default function PublishCard({ content }) {
 
   return (
     <section aria-labelledby="publish-title" className={cn(cardClass, "p-6")}>
-      <h2 id="publish-title" className="mb-3 text-lg font-extrabold text-ink">Publikasi</h2>
+      <h2 id="publish-title" className="mb-3 text-lg font-extrabold text-ink">Published</h2>
 
       {published && url ? (
         <>

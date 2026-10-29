@@ -16,20 +16,20 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { FORMAT_MAP } from "@/constant/formats"
-import { PRIORITY_MAP } from "@/constant/priorities"
-import { STATUSES } from "@/constant/status"
+import { FORMAT_MAP } from "@/constant/formats.js"
+import { PRIORITY_MAP } from "@/constant/priorities.js"
+import { STATUSES } from "@/constant/status.js"
 import ContentEditDialog from "@/features/contents/ContentEditDialog"
 import ChecklistSection from "@/features/contents/detail/ChecklistSection"
 import MetricsSection from "@/features/contents/detail/MetricsSection"
 import PublishCard from "@/features/contents/detail/PublishCard"
 import StatusStepper from "@/features/contents/detail/StatusStepper"
-import { useChannels } from "@/hooks/useChannels"
-import { useContent } from "@/hooks/useContent"
-import { formatDateLong } from "@/lib/format"
-import { cardClass, filterTriggerClass, outlineBtn } from "@/lib/styles"
-import { cn } from "@/lib/utils"
-import { deleteContent, updateContent } from "@/services/content.service"
+import { useChannels } from "@/hooks/useChannels.js"
+import { useContent } from "@/hooks/useContent.js"
+import { formatDateLong } from "@/lib/format.js"
+import { cardClass, filterTriggerClass, outlineBtn } from "@/lib/styles.js"
+import { cn } from "@/lib/utils.js"
+import { deleteContent, updateContent } from "@/services/content.service.js"
 
 export default function ContentDetailPage() {
   const { id } = useParams()
@@ -124,7 +124,7 @@ export default function ContentDetailPage() {
             onClick={() => setDeleting(true)}
             className={cn(outlineBtn, "text-danger hover:text-danger")}
           >
-            Hapus
+            Delete
           </Button>
         </div>
       </header>

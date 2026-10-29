@@ -1,10 +1,11 @@
 import { useState } from "react"
-import { Link, NavLink, useLocation } from "react-router-dom"
-import { BarChart3, Check, ChevronDown, FileText, LayoutGrid, Settings, User } from "lucide-react"
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom"
+import { BarChart3, Check, ChevronDown, FileText, LayoutGrid, LogOut, Settings, User } from "lucide-react"
 import logoIcon from "@/assets/logo-icon.png"
 import UserAvatar from "@/components/common/UserAvatar"
 import { useAuth } from "@/hooks/useAuth.js"
 import { cn } from "@/lib/utils.js"
+import { logoutRequest } from "@/services/account.service.js"
 
 const baseItem = "flex h-11 items-center gap-3 rounded-xl px-3 text-sm transition-colors"
 const idle = "text-nav-ink hover:bg-white/5 hover:text-white"
@@ -28,6 +29,26 @@ function SubItem({ to, isActive, children }) {
     >
       {children}
     </Link>
+  )
+}
+
+function LogoutButton (){
+  const { logout } = useAuth();
+  const navigate = useNavigate();
+  const [ loading, setLoading ] = useState(false);
+
+  const handleLogout = async () => {
+    if (loading) return
+    setLoading(true)
+    await logoutRequest()
+    logout()
+    navigate("/login", { replace: true })
+  }
+
+  return (
+    <button type="button" onClick={handleLogout} disabled={loading} aria-label="Logout" title="Logout" className={cn("flex size-9 flex-none items-center justify-center rounded-xl transition-colors text-nav-ink hover:bg-white/10 hover:text-white disabled:opacity-50")}>
+      <LogOut className="size-4.5" aria-hidden="true"/>
+    </button>
   )
 }
 
@@ -77,10 +98,11 @@ export default function AppSidebar() {
 
       <div className="mt-auto flex items-center gap-3 px-1 pt-6">
         <UserAvatar user={user} className="size-9" />
-        <div className="text-sm leading-tight text-white">
-          {user?.name}
+        <div className="min-w-0 flex-1 text-sm leading-tight text-white">
+          <p className="truncate font-semibold">{user?.name}</p>
           <span className="block text-nav-ink">{user?.role}</span>
         </div>
+        <LogoutButton/>
       </div>
     </aside>
   )

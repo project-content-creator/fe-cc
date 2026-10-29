@@ -16,7 +16,7 @@ import { cn } from "@/lib/utils.js"
 import { updateProfile } from "@/services/account.service.js"
 
 const MAX_PHOTO_BYTES = 2 * 1024 * 1024
-const PHOTO_TYPES = ["image/jpeg", "image/png"]
+const PHOTO_TYPES = ["image/jpeg", "image/png", "image/jpg"]
 
 const profileSchema = z.object({
   name: z.string().trim().min(1, "Nama wajib diisi"),
@@ -73,13 +73,13 @@ export default function ProfileCard() {
       setRemoved(false)
       setSaved(true)
     } catch (err) {
-      applyServerErrors(err, setError, "Gagal menyimpan profil. Coba lagi.")
+      applyServerErrors(err, setError, "Gagal Menyimpan Profile. Coba Lagi.")
     }
   }
 
   return (
     <section aria-labelledby="profile-title" className={cn(cardClass, "p-6")}>
-      <h2 id="profile-title" className="mb-4 text-lg font-extrabold text-ink">Profil</h2>
+      <h2 id="profile-title" className="mb-4 text-lg font-extrabold text-ink">Profile</h2>
 
       <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-4">
         {errors.root?.server && (
@@ -104,7 +104,7 @@ export default function ProfileCard() {
           <div>
             <div className="flex gap-2">
               <Button type="button" onClick={() => inputRef.current?.click()} className={brandBtn}>
-                Unggah foto
+                Unggah Foto
               </Button>
               <Button
                 type="button"
@@ -113,10 +113,10 @@ export default function ProfileCard() {
                 disabled={!avatarSrc}
                 className={outlineBtn}
               >
-                Hapus foto
+                Hapus Foto
               </Button>
             </div>
-            <p className="mt-2 text-xs text-muted-ink">JPG atau PNG, maksimal 2 MB</p>
+            <p className="mt-2 text-xs text-muted-ink">JPG/JPEG atau PNG, maksimal 2 MB</p>
             {photoError && <p role="alert" className="mt-1 text-xs font-semibold text-danger">{photoError}</p>}
             <input
               ref={inputRef}
@@ -134,7 +134,7 @@ export default function ProfileCard() {
           Role: {user?.role}
         </span>
 
-        <FormField id="profile-name" label="Nama lengkap" error={errors.name?.message}>
+        <FormField id="profile-name" label="Nama Lengkap" error={errors.name?.message}>
           <Input
             id="profile-name"
             autoComplete="name"
@@ -158,15 +158,15 @@ export default function ProfileCard() {
         </FormField>
 
         <Button type="submit" disabled={isSubmitting} className={brandBtn}>
-          {isSubmitting ? "Menyimpan..." : "Simpan profil"}
+          {isSubmitting ? "Menyimpan..." : "Simpan Profile"}
         </Button>
       </form>
 
       <FeedbackDialog
         open={saved}
         onOpenChange={setSaved}
-        title="Profil berhasil disimpan"
-        description="Perubahan nama, email, dan foto profil kamu sudah tersimpan."
+        title="Profile Berhasil Disimpan"
+        description="Perubahan Kamu Sudah Tersimpan."
       />
     </section>
   )

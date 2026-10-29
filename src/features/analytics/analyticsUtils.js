@@ -9,8 +9,8 @@ export const PERIODS = [
 ]
 
 // Metrik adalah "snapshot" (angka kumulatif per tanggal pencatatan). Aturan di sini:
-// - Total per konten = snapshot terbaru dalam periode yang dipilih.
-// - Grafik = jumlah views dari semua snapshot yang dicatat pada tanggal yang sama.
+// Total per konten = snapshot terbaru dalam periode yang dipilih.
+// Grafik = jumlah views dari semua snapshot yang dicatat pada tanggal yang sama.
 export function buildAnalytics(contents, period, today = new Date()) {
   const start = period === "all" ? null : format(subDays(today, Number(period)), "yyyy-MM-dd")
   const rows = []

@@ -23,7 +23,7 @@ const metricSchema = z.object({
   recorded_at: z.string().min(1, "Tanggal wajib diisi"),
   views_count: count("Views"),
   likes_count: count("Likes"),
-  comments_count: count("Komentar"),
+  comments_count: count("Comments"),
   shares_count: count("Shares"),
 })
 
@@ -53,7 +53,7 @@ function ViewsChart({ metrics }) {
 const FIELDS = [
   ["views_count", "Views"],
   ["likes_count", "Likes"],
-  ["comments_count", "Komentar"],
+  ["comments_count", "Comments"],
   ["shares_count", "Shares"],
 ]
 

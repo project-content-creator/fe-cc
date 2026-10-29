@@ -1,7 +1,7 @@
 import api from "@/lib/api.js"
 import { normalizeAuth, unwrap } from "@/services/normalizers.js"
 
-// POST /auth/register. Pendaftaran memakai POST /user
+// POST /auth/register
 export async function registerUser({ name, email, password }) {
   try {
     const { data } = await api.post("/user", { name, email, password, role: "creator" })
@@ -27,6 +27,7 @@ export async function loginUser({ email, password }) {
     )
     auth.user = { ...auth.user, ...profile }
   } catch {
+    ;
   }
   return auth
 }

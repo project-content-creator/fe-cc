@@ -26,7 +26,7 @@ export async function createChannel(payload) {
   cache = null
 }
 
-// PUT /api/v1/channel/:id (user_id, platform, handle_name wajib dikirim semuanya)
+// PUT /api/v1/channel/:id 
 export async function updateChannel(id, payload) {
   await api.put(`/channel/${id}`, { user_id: getUserId(), ...payload })
   cache = null

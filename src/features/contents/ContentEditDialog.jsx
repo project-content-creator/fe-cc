@@ -59,7 +59,7 @@ export default function ContentEditDialog({ content, channels, onClose, onSaved 
       <DialogContent className="max-h-[92svh] max-w-3xl overflow-y-auto rounded-3xl p-8 sm:max-w-3xl">
         <DialogHeader>
           <DialogTitle className="text-xl font-extrabold text-ink">Edit Konten</DialogTitle>
-          <DialogDescription className="sr-only">Ubah data konten lalu simpan perubahan.</DialogDescription>
+          <DialogDescription className="sr-only">Ubah data konten lalu simpan perubahan</DialogDescription>
         </DialogHeader>
         {content && (
           <EditForm key={content.id} content={content} channels={channels} onClose={onClose} onSaved={onSaved} />

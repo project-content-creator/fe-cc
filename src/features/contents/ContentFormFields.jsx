@@ -61,7 +61,7 @@ export default function ContentFormFields({ mode, form, channels }) {
           name="format_type"
           control={control}
           render={({ field }) => (
-            <ChipGroup label="Format konten" options={FORMATS} value={field.value} onChange={field.onChange} />
+            <ChipGroup label="Format Konten" options={FORMATS} value={field.value} onChange={field.onChange} />
           )}
         />
       </FormField>
@@ -124,7 +124,7 @@ export default function ContentFormFields({ mode, form, channels }) {
         <Textarea
           id="script_draft"
           rows={isEdit ? 4 : 7}
-          placeholder="Tulis hook dan alur cerita..."
+          placeholder="Tulis hook dan alur ceritamu..."
           className={textareaClass}
           {...register("script_draft")}
         />

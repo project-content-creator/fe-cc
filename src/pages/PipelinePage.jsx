@@ -3,7 +3,6 @@ import { Link } from "react-router-dom"
 import EmptyState from "@/components/common/EmptyState"
 import ErrorState from "@/components/common/ErrorState"
 import LoadingBlock from "@/components/common/LoadingBlock"
-import PageHeader from "@/components/common/PageHeader"
 import { Button } from "@/components/ui/button"
 import ContentFilters from "@/features/contents/ContentFilters"
 import KanbanBoard from "@/features/contents/KanbanBoard"
@@ -15,7 +14,6 @@ import { brandBtn } from "@/lib/styles.js"
 export default function PipelinePage() {
   const { filters, setFilter, params } = useContentFilters()
   const { data: channels } = useChannels()
-  // Pipeline menampilkan semua status, jadi filter status tidak dipakai.
   const { data: contents, loading, error, reload } = useContents({
     ...params,
     status: undefined,
@@ -23,10 +21,6 @@ export default function PipelinePage() {
 
   return (
     <>
-      <PageHeader title="Pipeline" subtitle="Pantau alur produksi dari ide sampai tayang">
-        <Button asChild className={brandBtn}><Link to="/content/new">+ Ide Baru</Link></Button>
-      </PageHeader>
-
       <ContentFilters filters={filters} setFilter={setFilter} channels={channels} showStatus={false} />
 
       {error ? (

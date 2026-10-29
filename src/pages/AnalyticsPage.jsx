@@ -16,7 +16,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { PLATFORMS } from "@/constant/platforms.js"
-import { buildAnalytics, PERIODS } from "@/features/analytics/analyticsUtils"
+import { buildAnalytics, PERIODS } from "@/features/analytics/analyticsUtils.js"
 import { usePublishedMetrics } from "@/hooks/usePublishedMetrics.js"
 import { formatCompact } from "@/lib/format.js"
 import { cardClass, filterTriggerClass } from "@/lib/styles.js"
@@ -31,7 +31,7 @@ export default function AnalyticsPage() {
 
   return (
     <>
-      <PageHeader title="Analytics" subtitle="Performa konten yang sudah published">
+      <PageHeader title="Analytics" subtitle="Performa Konten Yang Sudah Published">
         <Select value={period} onValueChange={setPeriod}>
           <SelectTrigger aria-label="Periode" className={filterTriggerClass}>
             <SelectValue />

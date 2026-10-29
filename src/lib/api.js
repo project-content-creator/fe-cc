@@ -4,7 +4,7 @@ import axios from "axios"
 // export const USER_KEY = "user"
 
 const api = axios.create({
-  baseURL: "http://localhost:5000/api",
+  baseURL: "http://localhost:5000/api/v1",
   header: {
         "Content-Type":"application/json",
         Accept:"application/json"

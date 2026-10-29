@@ -7,7 +7,7 @@ export default function ThemeCard() {
     <section aria-labelledby="theme-title" className={cn(cardClass, "flex items-center justify-between gap-4 p-6")}>
       <div>
         <h2 id="theme-title" className="text-lg font-extrabold text-ink">Tema</h2>
-        <p className="text-sm text-muted-ink">Pilih tampilan aplikasi</p>
+        <p className="text-sm text-muted-ink">Pilih Tampilan Aplikasi</p>
       </div>
       <ModeToggle />
     </section>

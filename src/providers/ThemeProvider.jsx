@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from "react"
-import { ThemeContext } from "@/providers/theme-context"
+import { ThemeContext } from "@/providers/theme-context.js"
 
 const STORAGE_KEY = "creatortrack-theme"
 

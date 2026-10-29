@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import { Toaster } from "sonner"
 
+import LandingPage from "@/pages/LandingPage"
 import AppLayout from "@/components/layout/AppLayout"
 import ChannelsPage from "@/pages/ChannelsPage"
 import ContentCreatePage from "@/pages/ContentCreatePage"
@@ -10,13 +11,15 @@ import DashboardPage from "@/pages/DashboardPage"
 import LoginPage from "@/pages/LoginPage"
 import NotFoundPage from "@/pages/NotFoundPage"
 import PipelinePage from "@/pages/PipelinePage"
-import PlaceholderPage from "@/pages/PlaceholderPage"
 import RegisterPage from "@/pages/RegisterPage"
 import AuthProvider from "@/providers/AuthProvider"
 import GuestRoute from "@/routes/GuestRoute"
 import ProtectedRoute from "@/routes/ProtectedRoute"
+import SettingsPage from "@/pages/SettingsPage"
+import AnalyticsPage from "./pages/AnalyticsPage";
 
 const router = createBrowserRouter([
+  { path: "/", element: <LandingPage/>},
   {
     element: <GuestRoute />,
     children: [
@@ -33,11 +36,11 @@ const router = createBrowserRouter([
           { index: true, element: <DashboardPage /> },
           { path: "/pipeline", element: <PipelinePage /> },
           { path: "/content", element: <ContentListPage /> },
-          { path: "/channel/new", element: <ContentCreatePage /> },
+          { path: "/content/new", element: <ContentCreatePage /> },
           { path: "/content/:id", element: <ContentDetailPage /> },
-          { path: "/analytics", element: <PlaceholderPage title="Analytics" /> },
+          { path: "/analytics", element: <AnalyticsPage/>},
           { path: "/channels", element: <ChannelsPage /> },
-          { path: "/settings", element: <PlaceholderPage title="Settings" /> },
+          { path: "/settings", element: <SettingsPage /> },
         ],
       },
     ],

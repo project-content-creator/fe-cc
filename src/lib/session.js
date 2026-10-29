@@ -1,4 +1,4 @@
-import api from "@/lib/api.js"
+const USER_KEY = "USER_KEY"
   
 export function getStoredUser() {
   try {

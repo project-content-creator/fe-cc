@@ -25,8 +25,8 @@ export default function LogoutCard() {
   return (
     <section className={cn(cardClass, "flex items-center justify-between gap-4 p-6")}>
       <div>
-        <h2 className="font-bold text-ink">Keluar dari akun</h2>
-        <p className="text-sm text-muted-ink">Sesi di perangkat ini akan berakhir</p>
+        <h2 className="font-bold text-ink">Keluar Akun</h2>
+        <p className="text-sm text-muted-ink">Sesi Di Device Ini Akan Berakhir</p>
       </div>
       <Button
         variant="outline"
@@ -40,9 +40,9 @@ export default function LogoutCard() {
         open={open}
         onOpenChange={(value) => !loading && setOpen(value)}
         icon={LogOut}
-        title="Apakah anda yakin ingin keluar akun?"
-        description="Sesi di perangkat ini akan berakhir dan kamu perlu login lagi."
-        confirmLabel="Ya, keluar"
+        title="Apakah Anda Yakin Ingin Keluar Akun?"
+        description="Sesi Di Device Ini Akan Berakhir dan Kamu Perlu Login Lagi..."
+        confirmLabel="Ya, Keluar"
         loadingLabel="Keluar..."
         loading={loading}
         onConfirm={confirm}

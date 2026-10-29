@@ -53,7 +53,6 @@ export default function ChannelsPage() {
       setDeleting(null)
       reload()
     } catch (err) {
-      // Backend bisa menolak jika channel masih punya konten; tampilkan alasannya.
       toast.error(err.response?.data?.message ?? "Gagal menghapus channel. Coba lagi.")
     } finally {
       setDeleteLoading(false)

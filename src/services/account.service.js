@@ -1,4 +1,4 @@
-import api from "@/services/api.js"
+import api from "@/lib/api.js"
 import { getStoredUser } from "@/lib/session.js"
 import { unwrap } from "@/services/normalizers.js"
 

@@ -3,18 +3,13 @@ import { Link } from "react-router-dom"
 import { format, parseISO } from "date-fns"
 import { id as localeId } from "date-fns/locale"
 
-import ErrorState from "@/components/common/ErrorState"
-import LoadingBlock from "@/components/common/LoadingBlock"
-import PageHeader from "@/components/common/PageHeader"
 import StatusBadge from "@/components/common/StatusBadge"
-import { Button } from "@/components/ui/button"
 import { FORMAT_MAP } from "@/constant/formats.js"
 import { PLATFORMS } from "@/constant/platforms.js"
 import { getAttentionItems, getUpcoming } from "@/features/dashboard/dashboardUtils.js"
-import { useAuth } from "@/hooks/useAuth.js"
 import { useContents } from "@/hooks/useContents.js"
 import { formatCompact } from "@/lib/format.js"
-import { brandBtn, cardClass } from "@/lib/styles.js"
+import { cardClass } from "@/lib/styles.js"
 import { cn } from "@/lib/utils.js"
 
 function StatCard({ label, value, note }) {
@@ -28,15 +23,13 @@ function StatCard({ label, value, note }) {
 }
 
 export default function DashboardPage() {
-  const { user } = useAuth()
-  const { data: contents, loading, error, reload } = useContents()
+  const { data: contents } = useContents()
 
   const stats = useMemo(() => ({
     total: contents.length,
     channels: new Set(contents.map((c) => c.channel?.id ?? c.channel_id)).size,
     producing: contents.filter((c) => ["recording", "editing"].includes(c.status)).length,
     ready: contents.filter((c) => c.status === "ready").length,
-    // null jika API belum mengirim data views (ditampilkan sebagai "-")
     views: contents.some((c) => c.latest_views != null)
       ? contents.reduce((sum, c) => sum + (c.latest_views ?? 0), 0)
       : null,
@@ -45,26 +38,13 @@ export default function DashboardPage() {
   const attention = useMemo(() => getAttentionItems(contents), [contents])
 
   return (
-    <>
-      <PageHeader title={`Halo, ${user?.name?.split(" ")[0] ?? ""}`} subtitle="Ringkasan konten kamu minggu ini">
-        <Button asChild className={brandBtn}><Link to="/content/new">+ Ide Baru</Link></Button>
-      </PageHeader>
-
-      {error ? (
-        <ErrorState onRetry={reload} />
-      ) : loading ? (
-        <div className="space-y-4">
-          <LoadingBlock className="h-32" />
-          <LoadingBlock className="h-64" />
+      <>
+        <div className="mb-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+          <StatCard label="Total konten" value={stats.total} note={`di ${stats.channels} channel`} />
+          <StatCard label="Dalam produksi" value={stats.producing} note="recording + editing" />
+          <StatCard label="Siap tayang" value={stats.ready} note="status Ready" />
+          <StatCard label="Total views" value={stats.views == null ? "-" : formatCompact(stats.views)} note="konten published" />
         </div>
-      ) : (
-        <>
-          <div className="mb-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-            <StatCard label="Total konten" value={stats.total} note={`di ${stats.channels} channel`} />
-            <StatCard label="Dalam produksi" value={stats.producing} note="recording + editing" />
-            <StatCard label="Siap tayang" value={stats.ready} note="status Ready" />
-            <StatCard label="Total views" value={stats.views == null ? "-" : formatCompact(stats.views)} note="konten published" />
-          </div>
 
           <div className="grid gap-4 lg:grid-cols-2">
             <section className={cn(cardClass, "p-6")}>
@@ -116,7 +96,4 @@ export default function DashboardPage() {
             </section>
           </div>
         </>
-      )}
-    </>
-  )
-}
+)}

@@ -1,4 +1,4 @@
-// Kelas Tailwind yang dipakai berulang agar tampilan konsisten dengan desain.
+// Class Tailwind yang dipakai berulang agar tampilan konsisten dengan desain.
 export const cardClass = "rounded-3xl bg-card shadow-[0_4px_24px_rgba(79,95,255,0.08)]"
 export const brandBtn =
   "bg-brand-gradient h-11 rounded-xl px-5 text-sm font-bold text-white hover:opacity-90"

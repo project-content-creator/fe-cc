@@ -1,12 +1,7 @@
 import { format } from "date-fns"
 
-// Satu-satunya tempat yang tahu bentuk respons mentah backend.
-// Jika nama field di API berbeda, cukup ubah file ini.
-
 export const unwrap = (response) => response.data?.data ?? response.data
 
-// Kolom DATE bisa datang sebagai "2026-10-18" atau timestamp ISO ("2026-10-17T17:00:00.000Z").
-// Timestamp dibaca ulang dengan zona waktu perangkat agar tanggalnya tidak bergeser sehari.
 const toDate = (value) => {
   if (!value) return null
   const text = String(value)
@@ -41,7 +36,6 @@ export function normalizeContent(raw, channelsById = {}) {
     published_date: toDate(raw.published_date),
     checklists,
     metrics,
-    // Ringkasan untuk daftar: dipakai jika backend menyediakannya, atau dihitung dari relasi.
     checklist_total: raw.checklist_total ?? raw.checklists_count ?? checklists?.length,
     checklist_done:
       raw.checklist_done ?? raw.checklists_completed_count ?? checklists?.filter((c) => c.is_completed).length,
@@ -53,7 +47,6 @@ export function normalizeContent(raw, channelsById = {}) {
 export function normalizeAuth(data, fallbackEmail) {
   const payload = data?.data ?? data
   const token = payload?.token ?? payload?.access_token
-  // Jika backend tidak mengirim objek user, pakai email sebagai nama sementara.
   const user = payload?.user ?? { name: fallbackEmail, email: fallbackEmail, role: "creator" }
   return { token, user }
 }

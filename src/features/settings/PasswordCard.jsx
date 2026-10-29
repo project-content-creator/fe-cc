@@ -35,16 +35,16 @@ export default function PasswordCard() {
     } catch (err) {
       const status = err.response?.status
       if (status === 401 || status === 403) {
-        setError("current_password", { type: "server", message: "Password saat ini salah" })
+        setError("current_password", { type: "server", message: "Password Anda Salah" })
       } else {
-        applyServerErrors(err, setError, "Gagal mengganti password. Coba lagi.")
+        applyServerErrors(err, setError, "Gagal Mengganti Password. Coba Lagi.")
       }
     }
   }
 
   return (
     <section aria-labelledby="password-title" className={cn(cardClass, "p-6")}>
-      <h2 id="password-title" className="mb-4 text-lg font-extrabold text-ink">Ganti password</h2>
+      <h2 id="password-title" className="mb-4 text-lg font-extrabold text-ink">Ganti Password</h2>
 
       <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-4">
         {errors.root?.server && (
@@ -78,15 +78,15 @@ export default function PasswordCard() {
         </FormField>
 
         <Button type="submit" disabled={isSubmitting} className={brandBtn}>
-          {isSubmitting ? "Memproses..." : "Perbarui password"}
+          {isSubmitting ? "Memproses..." : "Perbarui Password"}
         </Button>
       </form>
 
       <FeedbackDialog
         open={done}
         onOpenChange={setDone}
-        title="Password berhasil diganti"
-        description="Gunakan password baru kamu saat login berikutnya."
+        title="Password Berhasil Diganti"
+        description="Gunakan Password Baru Kamu Saat Login Berikutnya Yaaaa.."
       />
     </section>
   )

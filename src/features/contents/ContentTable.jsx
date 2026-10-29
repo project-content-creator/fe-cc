@@ -22,8 +22,8 @@ export default function ContentTable({ contents, onEdit, onDelete }) {
             <th scope="col" className="pb-3 font-medium">Format</th>
             <th scope="col" className="pb-3 font-medium">Status</th>
             <th scope="col" className="pb-3 font-medium">Prioritas</th>
-            <th scope="col" className="pb-3 font-medium">Jadwal</th>
-            <th scope="col" className="pb-3"><span className="sr-only">Aksi</span></th>
+            <th scope="col" className="pb-3 font-medium">Schedule</th>
+            <th scope="col" className="pb-3"><span className="sr-only">Action</span></th>
           </tr>
         </thead>
         <tbody>
@@ -48,7 +48,7 @@ export default function ContentTable({ contents, onEdit, onDelete }) {
                     onClick={() => onDelete(content)}
                     className={cn(outlineBtn, small, "text-danger hover:text-danger")}
                   >
-                    Hapus
+                    Delete
                   </Button>
                 </div>
               </td>
@@ -56,7 +56,7 @@ export default function ContentTable({ contents, onEdit, onDelete }) {
           ))}
         </tbody>
       </table>
-      <p className="mt-4 text-xs text-muted-ink">Menampilkan {contents.length} konten</p>
+      <p className="mt-4 text-xs text-muted-ink">Menampilkan {contents.length} Konten</p>
     </div>
   )
 }
