@@ -19,7 +19,7 @@ export default function LogoutCard() {
     setLoading(true)
     await logoutRequest()
     logout()
-    navigate("/login", { replace: true })
+    navigate("/", { replace: true })
   }
 
   return (

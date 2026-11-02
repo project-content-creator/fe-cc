@@ -5,7 +5,8 @@ import { cn } from "@/lib/utils.js"
 
 const small = "h-10 px-4"
 
-export default function ChannelCard({ channel, contentCount, onEdit, onDelete }) {
+// `canManage`: tombol Edit/Hapus hanya untuk admin atau pemilik channel (creator).
+export default function ChannelCard({ channel, contentCount, canManage, onEdit, onDelete }) {
   const platform = PLATFORMS[channel.platform]
 
   return (
@@ -16,7 +17,10 @@ export default function ChannelCard({ channel, contentCount, onEdit, onDelete })
         </span>
         <div className="min-w-0">
           <h2 className="truncate font-bold text-ink">{channel.handle_name}</h2>
-          <p className="text-xs text-muted-ink">{platform?.label}</p>
+          <p className="text-xs text-muted-ink">
+            {platform?.label}
+            {channel.owner_name && ` · oleh ${channel.owner_name}`}
+          </p>
         </div>
       </div>
 
@@ -24,18 +28,20 @@ export default function ChannelCard({ channel, contentCount, onEdit, onDelete })
         <span className="rounded-full bg-[#dce6ff] px-3 py-1 text-xs font-bold text-[#1b3a9e]">
           {contentCount} konten
         </span>
-        <div className="flex gap-1.5">
-          <Button variant="outline" onClick={() => onEdit(channel)} className={cn(outlineBtn, small)}>
-            Edit
-          </Button>
-          <Button
-            variant="outline"
-            onClick={() => onDelete(channel)}
-            className={cn(outlineBtn, small, "text-danger hover:text-danger")}
-          >
-            Hapus
-          </Button>
-        </div>
+        {canManage && (
+          <div className="flex gap-1.5">
+            <Button variant="outline" onClick={() => onEdit(channel)} className={cn(outlineBtn, small)}>
+              Edit
+            </Button>
+            <Button
+              variant="outline"
+              onClick={() => onDelete(channel)}
+              className={cn(outlineBtn, small, "text-danger hover:text-danger")}
+            >
+              Hapus
+            </Button>
+          </div>
+        )}
       </div>
     </article>
   )

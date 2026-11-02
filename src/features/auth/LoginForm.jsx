@@ -36,7 +36,7 @@ export default function LoginForm() {
     try {
       const data = await loginUser(values)
       login(data)
-      navigate(location.state?.from?.pathname ?? "/", { replace: true })
+      navigate(location.state?.from?.pathname ?? "/dashboard", { replace: true })
     } catch (err) {
       const status = err.response?.status
       if (status === 401 || status === 422) {

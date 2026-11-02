@@ -1,41 +1,53 @@
-import { useCallback, useMemo, useState } from "react"
+import { useCallback, useEffect, useMemo, useState } from "react"
 import api from "@/lib/api.js"
+import { TOKEN_KEY, USER_KEY, clearSession, getStoredUser } from "@/lib/session.js"
 import { AuthContext } from "@/providers/auth-context.js"
 
-function readUser() {
-  try {
-    return JSON.parse(localStorage.getItem("USER_KEY"))
-  } catch {
-    return null
-  }
-}
-
 export default function AuthProvider({ children }) {
-  const [token, setToken] = useState(() => localStorage.getItem("TOKEN_KEY"))
-  const [user, setUser] = useState(readUser)
+  const [token, setToken] = useState(() => localStorage.getItem(TOKEN_KEY))
+  const [user, setUser] = useState(getStoredUser)
 
   const login = useCallback(({ token, user }) => {
-    localStorage.setItem("TOKEN_KEY", token)
-    localStorage.setItem("USER_KEY", JSON.stringify(user))
+    localStorage.setItem(TOKEN_KEY, token)
+    localStorage.setItem(USER_KEY, JSON.stringify(user))
     setToken(token)
     setUser(user)
   }, [])
 
   const logout = useCallback(() => {
-    localStorage.removeItem("TOKEN_KEY")
-    localStorage.removeItem("USER_KEY")
+    clearSession()
     setToken(null)
     setUser(null)
   }, [])
 
+  // Memperbarui sebagian data user (mis. setelah edit profil) dan menyimpannya.
   const updateUser = useCallback(
     (patch) => {
       const next = { ...user, ...patch }
-      localStorage.setItem("USER_KEY", JSON.stringify(next))
+      localStorage.setItem(USER_KEY, JSON.stringify(next))
       setUser(next)
     },
     [user]
   )
+
+  // Menyegarkan data user dari server saat aplikasi dibuka, agar perubahan role oleh admin ikut berlaku.
+  useEffect(() => {
+    if (!token) return undefined
+    let ignore = false
+    api
+      .get("/auth/me")
+      .then((response) => {
+        const fresh = response.data?.data
+        if (ignore || !fresh?.id) return
+        const merged = { ...getStoredUser(), ...fresh }
+        localStorage.setItem(USER_KEY, JSON.stringify(merged))
+        setUser(merged)
+      })
+      .catch(() => {})
+    return () => {
+      ignore = true
+    }
+  }, [token])
 
   const value = useMemo(
     () => ({ user, isAuthenticated: Boolean(token), login, logout, updateUser }),

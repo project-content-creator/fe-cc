@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import StatusBadge from "@/components/common/StatusBadge"
 import { STATUSES } from "@/constant/status.js"
 import logoLockup from "@/assets/logo-lockup.png"
@@ -24,6 +25,9 @@ export default function AuthLayout({ headline, description, children }) {
 
       <main className="flex items-center justify-center bg-card p-6 sm:p-10">
         <div className="w-full max-w-sm">
+          <Link to="/" className="mb-6 inline-block text-sm text-muted-ink hover:underline">
+            ← Kembali ke beranda
+          </Link>
           <img
             src={logoLockup}
             alt="CreatorTrack - Content & Pipeline Tracker"

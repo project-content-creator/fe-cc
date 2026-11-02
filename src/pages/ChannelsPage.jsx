@@ -11,13 +11,17 @@ import { PLATFORMS } from "@/constant/platforms.js"
 import ChannelCard from "@/features/channels/ChannelCard"
 import ChannelEditDialog from "@/features/channels/ChannelEditDialog"
 import ChannelForm from "@/features/channels/ChannelForm"
+import { useAuth } from "@/hooks/useAuth.js"
 import { useChannels } from "@/hooks/useChannels.js"
 import { useContents } from "@/hooks/useContents.js"
+import { canCreateChannel, canManageChannel } from "@/lib/permissions.js"
 import { brandBtn, cardClass } from "@/lib/styles.js"
 import { cn } from "@/lib/utils.js"
 import { createChannel, deleteChannel, updateChannel } from "@/services/channel.service.js"
 
 export default function ChannelsPage() {
+  const { user } = useAuth()
+  const canCreate = canCreateChannel(user)
   const { data: channels, loading, error, reload } = useChannels()
   const { data: contents } = useContents()
   const [editing, setEditing] = useState(null)
@@ -59,30 +63,36 @@ export default function ChannelsPage() {
     }
   }
 
-  const deletingCount = deleting ? (countByChannel[deleting.id] ?? 0) : 0
+  const deletingCount = deleting ? (deleting.contents_count ?? countByChannel[deleting.id] ?? 0) : 0
 
   return (
     <>
-      <PageHeader title="Channels" subtitle="Kelola akun media sosial yang kamu kelola">
-        <Button asChild className={brandBtn}>
-          <a href="#tambah-channel">+ Tambah channel</a>
-        </Button>
+      <PageHeader
+        title="Channels"
+        subtitle={canCreate ? "Kelola akun media sosial yang kamu kelola" : "Daftar akun media sosial tim"}
+      >
+        {canCreate && (
+          <Button nativeButton={false} render={<a href="#tambah-channel" />} className={brandBtn}>
+            + Tambah channel
+          </Button>
+        )}
       </PageHeader>
 
-      <div className="grid items-start gap-4 lg:grid-cols-2">
+      <div className={cn("grid items-start gap-4", canCreate && "lg:grid-cols-2")}>
         <div className="flex min-w-0 flex-col gap-4">
           {error ? (
             <ErrorState onRetry={reload} />
           ) : loading ? (
             <LoadingBlock className="h-40" />
           ) : channels.length === 0 ? (
-            <EmptyState title="Belum ada channel" description="Tambahkan channel pertamamu lewat form di samping." />
+            <EmptyState title="Belum ada channel" description={canCreate ? "Tambahkan channel pertamamu lewat form di samping." : "Belum ada channel yang terdaftar."} />
           ) : (
             channels.map((channel) => (
               <ChannelCard
                 key={channel.id}
                 channel={channel}
-                contentCount={countByChannel[channel.id] ?? 0}
+                contentCount={channel.contents_count ?? countByChannel[channel.id] ?? 0}
+                canManage={canManageChannel(user, channel)}
                 onEdit={setEditing}
                 onDelete={setDeleting}
               />
@@ -90,10 +100,12 @@ export default function ChannelsPage() {
           )}
         </div>
 
-        <section id="tambah-channel" aria-labelledby="add-channel-title" className={cn(cardClass, "scroll-mt-6 p-6")}>
-          <h2 id="add-channel-title" className="mb-4 text-lg font-extrabold text-ink">Tambah channel</h2>
-          <ChannelForm idPrefix="add-channel" submitLabel="Simpan channel" onSubmit={handleCreate} resetOnSuccess />
-        </section>
+        {canCreate && (
+          <section id="tambah-channel" aria-labelledby="add-channel-title" className={cn(cardClass, "scroll-mt-6 p-6")}>
+            <h2 id="add-channel-title" className="mb-4 text-lg font-extrabold text-ink">Tambah channel</h2>
+            <ChannelForm idPrefix="add-channel" submitLabel="Simpan channel" onSubmit={handleCreate} resetOnSuccess />
+          </section>
+        )}
       </div>
 
       <ChannelEditDialog channel={editing} onClose={() => setEditing(null)} onSubmit={handleUpdate} />

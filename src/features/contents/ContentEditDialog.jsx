@@ -12,7 +12,9 @@ import {
 } from "@/components/ui/dialog"
 import ContentFormFields from "@/features/contents/ContentFormFields"
 import { contentSchema, toFormValues, toPayload } from "@/features/contents/contentForm.js"
+import { useAuth } from "@/hooks/useAuth.js"
 import { applyServerErrors } from "@/lib/formErrors.js"
+import { canManageChannel } from "@/lib/permissions.js"
 import { brandBtn, outlineBtn } from "@/lib/styles.js"
 import { updateContent } from "@/services/content.service.js"
 
@@ -54,6 +56,9 @@ function EditForm({ content, channels, onClose, onSaved }) {
 }
 
 export default function ContentEditDialog({ content, channels, onClose, onSaved }) {
+  const { user } = useAuth()
+  const usableChannels = channels.filter((channel) => canManageChannel(user, channel))
+
   return (
     <Dialog open={Boolean(content)} onOpenChange={(open) => !open && onClose()}>
       <DialogContent className="max-h-[92svh] max-w-3xl overflow-y-auto rounded-3xl p-8 sm:max-w-3xl">
@@ -62,7 +67,7 @@ export default function ContentEditDialog({ content, channels, onClose, onSaved 
           <DialogDescription className="sr-only">Ubah data konten lalu simpan perubahan</DialogDescription>
         </DialogHeader>
         {content && (
-          <EditForm key={content.id} content={content} channels={channels} onClose={onClose} onSaved={onSaved} />
+          <EditForm key={content.id} content={content} channels={usableChannels} onClose={onClose} onSaved={onSaved} />
         )}
       </DialogContent>
     </Dialog>

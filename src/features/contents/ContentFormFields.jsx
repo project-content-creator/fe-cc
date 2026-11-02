@@ -15,14 +15,25 @@ import { FORMATS } from "@/constant/formats.js"
 import { PLATFORMS } from "@/constant/platforms.js"
 import { PRIORITIES } from "@/constant/priorities.js"
 import { STATUSES } from "@/constant/status.js"
+import { useAuth } from "@/hooks/useAuth.js"
+import { assignableStatuses, isAdmin } from "@/lib/permissions.js"
 import { inputClass, selectTriggerClass } from "@/lib/styles.js"
 
 const textareaClass = "rounded-xl border-line bg-card px-4 py-3 text-base text-ink focus-visible:border-brand-violet focus-visible:ring-brand-violet/30"
 
 export default function ContentFormFields({ mode, form, channels }) {
   const { register, control, formState: { errors } } = form
+  const { user } = useAuth()
   const status = useWatch({ control, name: "status" })
   const isEdit = mode === "edit"
+  const admin = isAdmin(user)
+
+  // Status yang boleh dipilih role ini (+ status saat ini agar tetap tampil).
+  const statusOptions = STATUSES.filter((item) => assignableStatuses(user?.role).includes(item.value) || item.value === status)
+  const channelItems = channels.map((channel) => ({
+    value: String(channel.id),
+    label: `${PLATFORMS[channel.platform]?.label} - ${channel.handle_name}`,
+  }))
 
   const invalid = (name) => ({
     "aria-invalid": !!errors[name],
@@ -40,15 +51,13 @@ export default function ContentFormFields({ mode, form, channels }) {
           name="channel_id"
           control={control}
           render={({ field }) => (
-            <Select value={field.value} onValueChange={field.onChange}>
+            <Select value={field.value} onValueChange={field.onChange} items={channelItems}>
               <SelectTrigger id="channel_id" className={selectTriggerClass} {...invalid("channel_id")}>
                 <SelectValue placeholder="Pilih channel" />
               </SelectTrigger>
               <SelectContent>
-                {channels.map((channel) => (
-                  <SelectItem key={channel.id} value={String(channel.id)}>
-                    {PLATFORMS[channel.platform]?.label} - {channel.handle_name}
-                  </SelectItem>
+                {channelItems.map((item) => (
+                  <SelectItem key={item.value} value={item.value}>{item.label}</SelectItem>
                 ))}
               </SelectContent>
             </Select>
@@ -87,12 +96,12 @@ export default function ContentFormFields({ mode, form, channels }) {
               name="status"
               control={control}
               render={({ field }) => (
-                <Select value={field.value} onValueChange={field.onChange}>
+                <Select value={field.value} onValueChange={field.onChange} items={statusOptions}>
                   <SelectTrigger id="status" className={selectTriggerClass}>
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    {STATUSES.map((item) => (
+                    {statusOptions.map((item) => (
                       <SelectItem key={item.value} value={item.value}>{item.label}</SelectItem>
                     ))}
                   </SelectContent>
@@ -101,18 +110,22 @@ export default function ContentFormFields({ mode, form, channels }) {
             />
           </FormField>
 
-          <FormField
-            id="published_url"
-            label={status === "published" ? "Published URL *" : "Published URL"}
-            hint="Wajib diisi bila status = Published"
-            error={errors.published_url?.message}
-          >
-            <Input id="published_url" type="url" inputMode="url" className={inputClass} {...invalid("published_url")} {...register("published_url")} />
-          </FormField>
+          {admin && (
+            <>
+              <FormField
+                id="published_url"
+                label={status === "published" ? "Published URL *" : "Published URL"}
+                hint="Wajib diisi bila status = Published"
+                error={errors.published_url?.message}
+              >
+                <Input id="published_url" type="url" inputMode="url" className={inputClass} {...invalid("published_url")} {...register("published_url")} />
+              </FormField>
 
-          <FormField id="published_date" label="Tanggal tayang">
-            <Input id="published_date" type="date" className={inputClass} {...register("published_date")} />
-          </FormField>
+              <FormField id="published_date" label="Tanggal tayang">
+                <Input id="published_date" type="date" className={inputClass} {...register("published_date")} />
+              </FormField>
+            </>
+          )}
         </>
       ) : (
         <FormField id="description" label="Deskripsi / konsep singkat">

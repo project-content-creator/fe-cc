@@ -12,7 +12,11 @@ import { filterTriggerClass } from "@/lib/styles.js"
 
 function FilterSelect({ label, value, onChange, allLabel, options }) {
   return (
-    <Select value={value || "all"} onValueChange={onChange}>
+    <Select
+      value={value || "all"}
+      onValueChange={onChange}
+      items={[{ value: "all", label: allLabel }, ...options]}
+    >
       <SelectTrigger aria-label={label} className={filterTriggerClass}>
         <SelectValue />
       </SelectTrigger>
@@ -26,7 +30,8 @@ function FilterSelect({ label, value, onChange, allLabel, options }) {
   )
 }
 
-export default function ContentFilters({ filters, setFilter, channels, showStatus = true }) {
+// `statuses`: daftar status yang boleh dipilih (disesuaikan dengan role pengguna).
+export default function ContentFilters({ filters, setFilter, channels, showStatus = true, statuses = STATUSES }) {
   const channelOptions = channels.map((channel) => ({
     value: String(channel.id),
     label: `${PLATFORMS[channel.platform]?.label} - ${channel.handle_name}`,
@@ -40,7 +45,7 @@ export default function ContentFilters({ filters, setFilter, channels, showStatu
           allLabel="Semua status"
           value={filters.status}
           onChange={(value) => setFilter("status", value)}
-          options={STATUSES}
+          options={statuses}
         />
       )}
       <FilterSelect

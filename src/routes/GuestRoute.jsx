@@ -4,5 +4,5 @@ import { useAuth } from "@/hooks/useAuth.js"
 // Halaman login/register: pengguna yang sudah masuk diarahkan ke dashboard.
 export default function GuestRoute() {
   const { isAuthenticated } = useAuth()
-  return isAuthenticated ? <Navigate to="/" replace /> : <Outlet />
+  return isAuthenticated ? <Navigate to="/dashboard" replace /> : <Outlet />
 }

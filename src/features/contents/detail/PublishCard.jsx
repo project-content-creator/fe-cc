@@ -1,4 +1,5 @@
 import { ExternalLink } from "lucide-react"
+import VideoEmbed from "@/components/common/VideoEmbed"
 import { isHttpUrl } from "@/features/contents/contentForm.js"
 import { formatDateLong } from "@/lib/format.js"
 import { cardClass } from "@/lib/styles.js"
@@ -29,14 +30,19 @@ export default function PublishCard({ content }) {
             <p className="text-sm break-all text-ink">{url}</p>
           )}
           <p className="mt-2 text-xs text-muted-ink">Tayang: {formatDateLong(content.published_date)}</p>
+          {isHttpUrl(url) && (
+            <div className="mt-4">
+              <VideoEmbed url={url} title={content.title} />
+            </div>
+          )}
         </>
       ) : published ? (
         <p role="alert" className="text-sm font-semibold text-danger">
-          Konten berstatus Published tetapi belum memiliki URL. Isi lewat tombol Edit.
+          Konten berstatus Published tetapi belum memiliki URL. Admin dapat mengisinya lewat tombol Edit.
         </p>
       ) : (
         <p className="text-sm text-muted-ink">
-          Published URL wajib diisi saat status konten diubah ke Published.
+          Admin akan mengisi Published URL saat konten dipublikasikan. Video akan tampil di sini setelah tayang.
         </p>
       )}
     </section>

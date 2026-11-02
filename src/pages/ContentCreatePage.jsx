@@ -8,15 +8,20 @@ import PageHeader from "@/components/common/PageHeader"
 import { Button } from "@/components/ui/button"
 import ContentFormFields from "@/features/contents/ContentFormFields"
 import { contentSchema, createDefaults, toPayload } from "@/features/contents/contentForm.js"
+import { useAuth } from "@/hooks/useAuth.js"
 import { useChannels } from "@/hooks/useChannels.js"
 import { applyServerErrors } from "@/lib/formErrors.js"
+import { canManageChannel } from "@/lib/permissions.js"
 import { brandBtn, cardClass, outlineBtn } from "@/lib/styles.js"
 import { cn } from "@/lib/utils.js"
 import { createContent } from "@/services/content.service.js"
 
 export default function ContentCreatePage() {
   const navigate = useNavigate()
-  const { data: channels } = useChannels()
+  const { user } = useAuth()
+  const { data: allChannels, loading: channelsLoading } = useChannels()
+  // Konten hanya boleh dibuat di channel milik sendiri (admin: semua channel).
+  const channels = allChannels.filter((channel) => canManageChannel(user, channel))
   const form = useForm({ resolver: zodResolver(contentSchema), defaultValues: createDefaults })
   const { handleSubmit, setError, setValue, getValues, formState: { errors, isSubmitting } } = form
 
@@ -39,7 +44,7 @@ export default function ContentCreatePage() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
       <PageHeader title="Buat Konten Baru" subtitle="Status awal otomatis: Idea">
-        <Button asChild variant="outline" className={outlineBtn}><Link to="/content">Batal</Link></Button>
+        <Button variant="outline" nativeButton={false} render={<Link to="/content" />} className={outlineBtn}>Batal</Button>
         <Button type="submit" disabled={isSubmitting} className={brandBtn}>
           {isSubmitting ? "Menyimpan..." : "Simpan ide"}
         </Button>
@@ -48,6 +53,12 @@ export default function ContentCreatePage() {
       {errors.root?.server && (
         <p role="alert" className="mb-4 max-w-4xl rounded-xl bg-danger/10 px-4 py-3 text-sm font-semibold text-danger">
           {errors.root.server.message}
+        </p>
+      )}
+
+      {!channelsLoading && channels.length === 0 && (
+        <p role="alert" className="mb-4 max-w-4xl rounded-xl bg-surface-deep px-4 py-3 text-sm text-ink">
+          Kamu belum punya channel. <Link to="/channels" className="font-bold text-link underline">Tambahkan channel</Link> dulu sebelum membuat konten.
         </p>
       )}
 

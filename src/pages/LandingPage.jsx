@@ -82,12 +82,14 @@ export default function LandingPage() {
     <div className="min-h-svh bg-[#0f1328] text-white">
       {/* Navbar */}
       <header className="sticky top-0 z-50 border-b border-white/10 bg-[#0f1328]/90 backdrop-blur-sm">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-          <img src={logoLockup} alt="CreatorTrack" className="h-8 w-auto" />
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-1 py-2">
+          <Link to="/" aria-label="CreatorTrack - beranda" className="rounded-xl bg-accent-foreground px-2 py-1">
+            <img src={logoLockup} alt="CreatorTrack" className="h-7 w-auto" />
+          </Link>
           <div className="flex items-center gap-3">
             {isAuthenticated ? (
               <Link
-                to="/"
+                to="/dashboard"
                 className="rounded-xl bg-linear-to-r from-indigo-400 to-blue-500 px-5 py-2.5 text-sm font-bold text-white transition-opacity hover:opacity-90"
               >
                 Buka Dashboard
@@ -139,7 +141,7 @@ export default function LandingPage() {
           </p>
           <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
             <Link
-              to={isAuthenticated ? "/" : "/register"}
+              to={isAuthenticated ? "/dashboard" : "/register"}
               className="w-full rounded-xl bg-linear-to-r from-indigo-400 to-blue-500 px-8 py-3.5 text-base font-bold text-white transition-opacity hover:opacity-90 sm:w-auto"
             >
               {isAuthenticated ? "Buka Dashboard →" : "Mulai Gratis →"}

@@ -5,16 +5,20 @@ import StatusBadge from "@/components/common/StatusBadge"
 import { Button } from "@/components/ui/button"
 import { FORMAT_MAP } from "@/constant/formats.js"
 import { PRIORITY_MAP } from "@/constant/priorities.js"
+import { useAuth } from "@/hooks/useAuth.js"
 import { formatDate } from "@/lib/format.js"
+import { canDeleteContent, canEditContent } from "@/lib/permissions.js"
 import { cardClass, outlineBtn } from "@/lib/styles.js"
 import { cn } from "@/lib/utils.js"
 
 const small = "h-10 px-4"
 
 export default function ContentTable({ contents, onEdit, onDelete }) {
+  const { user } = useAuth()
+
   return (
     <div className={cn(cardClass, "overflow-x-auto p-6")}>
-      <table className="w-full min-w-1.5 border-collapse text-sm text-ink">
+      <table className="w-full min-w-215 border-collapse text-sm text-ink">
         <thead>
           <tr className="border-b border-surface-deep text-left text-muted-ink">
             <th scope="col" className="pb-3 font-medium">Judul</th>
@@ -37,19 +41,28 @@ export default function ContentTable({ contents, onEdit, onDelete }) {
               <td className="py-3 pr-4">{formatDate(content.scheduled_date)}</td>
               <td className="py-3">
                 <div className="flex gap-1.5">
-                  <Button asChild variant="outline" className={cn(outlineBtn, small)}>
-                    <Link to={`/content/${content.id}`}>Lihat</Link>
-                  </Button>
-                  <Button variant="outline" onClick={() => onEdit(content)} className={cn(outlineBtn, small)}>
-                    Edit
-                  </Button>
                   <Button
                     variant="outline"
-                    onClick={() => onDelete(content)}
-                    className={cn(outlineBtn, small, "text-danger hover:text-danger")}
+                    nativeButton={false}
+                    render={<Link to={`/content/${content.id}`} />}
+                    className={cn(outlineBtn, small)}
                   >
-                    Delete
+                    Lihat
                   </Button>
+                  {canEditContent(user, content) && (
+                    <Button variant="outline" onClick={() => onEdit(content)} className={cn(outlineBtn, small)}>
+                      Edit
+                    </Button>
+                  )}
+                  {canDeleteContent(user, content) && (
+                    <Button
+                      variant="outline"
+                      onClick={() => onDelete(content)}
+                      className={cn(outlineBtn, small, "text-danger hover:text-danger")}
+                    >
+                      Delete
+                    </Button>
+                  )}
                 </div>
               </td>
             </tr>

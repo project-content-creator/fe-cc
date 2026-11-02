@@ -32,7 +32,7 @@ export default function AnalyticsPage() {
   return (
     <>
       <PageHeader title="Analytics" subtitle="Performa Konten Yang Sudah Published">
-        <Select value={period} onValueChange={setPeriod}>
+        <Select value={period} onValueChange={setPeriod} items={PERIODS}>
           <SelectTrigger aria-label="Periode" className={filterTriggerClass}>
             <SelectValue />
           </SelectTrigger>

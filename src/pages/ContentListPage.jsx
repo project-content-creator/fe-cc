@@ -8,12 +8,15 @@ import ErrorState from "@/components/common/ErrorState"
 import LoadingBlock from "@/components/common/LoadingBlock"
 import PageHeader from "@/components/common/PageHeader"
 import { Button } from "@/components/ui/button"
+import { STATUSES } from "@/constant/status.js"
 import ContentEditDialog from "@/features/contents/ContentEditDialog"
 import ContentFilters from "@/features/contents/ContentFilters"
 import ContentTable from "@/features/contents/ContentTable"
 import { useContentFilters } from "@/features/contents/useContentFilters.js"
+import { useAuth } from "@/hooks/useAuth.js"
 import { useChannels } from "@/hooks/useChannels.js"
 import { useContents } from "@/hooks/useContents.js"
+import { canCreateContent, visibleStatuses } from "@/lib/permissions.js"
 import { brandBtn } from "@/lib/styles.js"
 import { deleteContent } from "@/services/content.service.js"
 
@@ -31,6 +34,8 @@ function deleteDescription(content) {
 }
 
 export default function ContentListPage() {
+  const { user } = useAuth()
+  const selectableStatuses = STATUSES.filter((status) => visibleStatuses(user?.role).includes(status.value))
   const { filters, setFilter, params } = useContentFilters()
   const { data: channels } = useChannels()
   const { data: contents, loading, error, reload } = useContents(params)
@@ -58,10 +63,14 @@ export default function ContentListPage() {
   return (
     <>
       <PageHeader title="Content List" subtitle="Kelola semua ide dan konten kamu">
-        <Button asChild className={brandBtn}><Link to="/content/new">+ Buat konten</Link></Button>
+        {canCreateContent(user) && (
+          <Button nativeButton={false} render={<Link to="/content/new" />} className={brandBtn}>
+            + Buat konten
+          </Button>
+        )}
       </PageHeader>
 
-      <ContentFilters filters={filters} setFilter={setFilter} channels={channels} />
+      <ContentFilters filters={filters} setFilter={setFilter} channels={channels} statuses={selectableStatuses} />
 
       {error ? (
         <ErrorState onRetry={reload} />

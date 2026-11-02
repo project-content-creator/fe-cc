@@ -9,38 +9,33 @@ import LoadingBlock from "@/components/common/LoadingBlock"
 import PlatformBadge from "@/components/common/PlatformBadge"
 import StatusBadge from "@/components/common/StatusBadge"
 import { Button } from "@/components/ui/button"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
 import { FORMAT_MAP } from "@/constant/formats.js"
 import { PRIORITY_MAP } from "@/constant/priorities.js"
-import { STATUSES } from "@/constant/status.js"
 import ContentEditDialog from "@/features/contents/ContentEditDialog"
 import ChecklistSection from "@/features/contents/detail/ChecklistSection"
 import MetricsSection from "@/features/contents/detail/MetricsSection"
 import PublishCard from "@/features/contents/detail/PublishCard"
+import StatusActions from "@/features/contents/detail/StatusActions"
 import StatusStepper from "@/features/contents/detail/StatusStepper"
+import { useAuth } from "@/hooks/useAuth.js"
 import { useChannels } from "@/hooks/useChannels.js"
 import { useContent } from "@/hooks/useContent.js"
 import { formatDateLong } from "@/lib/format.js"
-import { cardClass, filterTriggerClass, outlineBtn } from "@/lib/styles.js"
+import { canDeleteContent, canEditContent, canViewMetrics } from "@/lib/permissions.js"
+import { cardClass, outlineBtn } from "@/lib/styles.js"
 import { cn } from "@/lib/utils.js"
-import { deleteContent, updateContent } from "@/services/content.service.js"
+import { deleteContent } from "@/services/content.service.js"
 
 export default function ContentDetailPage() {
   const { id } = useParams()
   const navigate = useNavigate()
   const { data: content, loading, error, reload } = useContent(id)
+  const { user } = useAuth()
   const { data: channels } = useChannels()
 
   const [editing, setEditing] = useState(null)
   const [deleting, setDeleting] = useState(false)
   const [deleteLoading, setDeleteLoading] = useState(false)
-  const [statusSaving, setStatusSaving] = useState(false)
 
   if (loading && !content) return <LoadingBlock className="h-96" />
   if (error?.response?.status === 404) {
@@ -54,27 +49,6 @@ export default function ContentDetailPage() {
 
   const checklists = content.checklists ?? []
   const metrics = content.metrics ?? []
-
-  const handleStatusChange = async (value) => {
-    if (value === content.status) return
-    // Published butuh URL, jadi arahkan ke form edit dengan status sudah terpilih.
-    if (value === "published" && !content.published_url) {
-      setEditing({ ...content, status: "published" })
-      return
-    }
-    setStatusSaving(true)
-    try {
-      await updateContent(content.id, { status: value })
-      toast.success("Status berhasil diperbarui")
-      reload()
-    } catch (err) {
-      toast.error(
-        err.response?.data?.errors?.status?.[0] ?? err.response?.data?.message ?? "Gagal mengubah status."
-      )
-    } finally {
-      setStatusSaving(false)
-    }
-  }
 
   const confirmDelete = async () => {
     setDeleteLoading(true)
@@ -107,25 +81,20 @@ export default function ContentDetailPage() {
           </div>
         </div>
 
-        <div className="flex flex-wrap items-center gap-2">
-          <Select value={content.status} onValueChange={handleStatusChange} disabled={statusSaving}>
-            <SelectTrigger aria-label="Ubah status" className={filterTriggerClass}>
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              {STATUSES.map((item) => (
-                <SelectItem key={item.value} value={item.value}>{item.label}</SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-          <Button variant="outline" onClick={() => setEditing(content)} className={outlineBtn}>Edit</Button>
-          <Button
-            variant="outline"
-            onClick={() => setDeleting(true)}
-            className={cn(outlineBtn, "text-danger hover:text-danger")}
-          >
-            Delete
-          </Button>
+        <div className="flex flex-wrap items-start justify-end gap-2">
+          <StatusActions content={content} onChanged={reload} />
+          {canEditContent(user, content) && (
+            <Button variant="outline" onClick={() => setEditing(content)} className={outlineBtn}>Edit</Button>
+          )}
+          {canDeleteContent(user, content) && (
+            <Button
+              variant="outline"
+              onClick={() => setDeleting(true)}
+              className={cn(outlineBtn, "text-danger hover:text-danger")}
+            >
+              Delete
+            </Button>
+          )}
         </div>
       </header>
 
@@ -151,12 +120,14 @@ export default function ContentDetailPage() {
 
         <div className="flex min-w-0 flex-col gap-4">
           <PublishCard content={content} />
-          <MetricsSection
-            key={`${content.id}-${content.status === "published"}`}
-            contentId={content.id}
-            isPublished={content.status === "published"}
-            initialMetrics={metrics}
-          />
+          {canViewMetrics(user) && (
+            <MetricsSection
+              key={`${content.id}-${content.status === "published"}`}
+              contentId={content.id}
+              isPublished={content.status === "published"}
+              initialMetrics={metrics}
+            />
+          )}
         </div>
       </div>
 

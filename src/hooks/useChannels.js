@@ -2,17 +2,19 @@ import { useEffect, useState } from "react"
 import { fetchChannels } from "@/services/channel.service.js"
 
 export function useChannels() {
-  const [data, setData] = useState([])
+  const [state, setState] = useState({ data: [], loading: true, error: null })
+  const [reloadKey, setReloadKey] = useState(0)
 
   useEffect(() => {
     let ignore = false
-    fetchChannels()
-      .then((channels) => !ignore && setData(channels))
-      .catch(() => {})
+    setState((prev) => ({ ...prev, loading: true, error: null }))
+    fetchChannels({ force: reloadKey > 0 })
+      .then((data) => !ignore && setState({ data, loading: false, error: null }))
+      .catch((error) => !ignore && setState({ data: [], loading: false, error }))
     return () => {
       ignore = true
     }
-  }, [])
+  }, [reloadKey])
 
-  return { data }
+  return { ...state, reload: () => setReloadKey((key) => key + 1) }
 }

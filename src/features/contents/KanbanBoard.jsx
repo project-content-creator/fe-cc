@@ -2,10 +2,14 @@ import StatusBadge from "@/components/common/StatusBadge"
 import { STATUSES } from "@/constant/status.js"
 import KanbanCard from "@/features/contents/KanbanCard"
 
-export default function KanbanBoard({ contents }) {
+// `statuses`: kolom yang ditampilkan (disesuaikan dengan role: creator 3 kolom, editor 2 kolom, admin 6 kolom).
+export default function KanbanBoard({ contents, statuses = STATUSES }) {
   return (
-    <div className="grid grid-cols-[repeat(6,minmax(180px,1fr))] gap-3 overflow-x-auto pb-2">
-      {STATUSES.map((status) => {
+    <div
+      className="grid gap-3 overflow-x-auto pb-2"
+      style={{ gridTemplateColumns: `repeat(${statuses.length}, minmax(200px, 1fr))` }}
+    >
+      {statuses.map((status) => {
         const items = contents.filter((content) => content.status === status.value)
         return (
           <section key={status.value} aria-label={status.label} className="min-h-64 rounded-3xl bg-surface-deep p-3">
